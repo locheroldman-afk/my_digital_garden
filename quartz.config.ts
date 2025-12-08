@@ -8,50 +8,55 @@ import * as Plugin from "./quartz/plugins"
  */
 const config: QuartzConfig = {
   configuration: {
-    pageTitle: "我的手账", // ✅ 这里可以改成你博客的名字
+    pageTitle: "我的手账",
     enableSPA: true,
     enablePopovers: true,
+
+    // ✅ ✅ ✅ 这里是【你要的页面宽度设置】✅ ✅ ✅
+    pageWidth: "1100px",
+
     analytics: {
       provider: "plausible",
     },
-    locale: "zh-CN", // ✅ 我帮你改成了中文环境
+    locale: "zh-CN",
     baseUrl: "quartz.jzhao.xyz",
     ignorePatterns: ["private", "templates", ".obsidian"],
     defaultDateType: "created",
+
+    // ✅ 你原来的【新主题配置】，完全保留
     theme: {
       fontOrigin: "googleFonts",
       cdnCaching: true,
       typography: {
-        header: "Patrick Hand",  // 手写风格标题
-        body: "Noto Sans SC",    // 清晰的正文
+        header: "Patrick Hand",  
+        body: "Lora",            
         code: "JetBrains Mono",
       },
       colors: {
         lightMode: {
-          light: "#fffbf0",     // 暖米色背景
-          lightgray: "#e5e0d8", // 浅灰
-          gray: "#b8b8b8",      // 灰色
-          darkgray: "#4a4a4a",  // 深灰正文
-          dark: "#2c2c2c",      // 标题色
-          secondary: "#ef7c8e", // 强调色（粉）
-          tertiary: "#84a59d",  // 悬停色（绿）
-          highlight: "rgba(239, 124, 142, 0.15)",
-          textHighlight: "#fff23688",
+          light: "#faf9f6",      
+          lightgray: "#e5e5e5",  
+          gray: "#b8b8b8",       
+          darkgray: "#4e4e4e",   
+          dark: "#2b2b2b",       
+          secondary: "#2e86de",  
+          tertiary: "#84817a",   
+          highlight: "rgba(143, 159, 169, 0.15)", 
         },
         darkMode: {
-          light: "#1e1e1e",
+          light: "#161618",
           lightgray: "#393639",
           gray: "#646464",
           darkgray: "#d4d4d4",
           dark: "#ebebec",
           secondary: "#7b97aa",
-          tertiary: "#84a59d",
+          tertiary: "#84817a",
           highlight: "rgba(143, 159, 169, 0.15)",
-          textHighlight: "#b3aa0288",
         },
       },
     },
   },
+
   plugins: {
     transformers: [
       Plugin.FrontMatter(),
@@ -72,7 +77,9 @@ const config: QuartzConfig = {
       Plugin.Description(),
       Plugin.Latex({ renderEngine: "katex" }),
     ],
+
     filters: [Plugin.RemoveDrafts()],
+
     emitters: [
       Plugin.AliasRedirects(),
       Plugin.ComponentResources(),
