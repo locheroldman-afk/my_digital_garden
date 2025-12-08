@@ -1,3 +1,76 @@
-@use "./base.scss";
+/* ============================================================
+   极简手绘风格定制 (Minimalist & Hand-drawn Style)
+   Designer: Gemini
+   ============================================================ */
 
-// put your custom CSS here!
+/* 1. 全局柔化：让所有直角都稍微圆润一点 */
+* {
+  border-radius: 4px; /* 轻微圆角 */
+}
+
+/* 2. 模拟手绘边框效果 - 核心代码 */
+/* 给搜索框、侧边栏容器等加一点“不完美”的边框感 */
+.search-button, .recent-notes, .backlinks, .graph {
+  border: 2px solid var(--lightgray) !important;
+  border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px !important; /* 魔法参数：产生手绘的不规则圆角 */
+  background-color: white; /* 像贴了一张便利贴 */
+  box-shadow: 2px 3px 5px rgba(0,0,0,0.02); /* 极淡的阴影，增加层次 */
+  padding: 1rem; /* 增加一点内边距，让文字呼吸 */
+  margin-bottom: 1rem;
+}
+
+/* 3. 引用块 (Blockquotes) - 变成竖线标记风格 */
+blockquote {
+  border-left: 4px solid var(--secondary) !important; /* 用你的强调色作为左边框 */
+  background-color: var(--highlight);
+  border-radius: 0 10px 10px 0 !important; /* 只有右边圆角 */
+  font-style: italic;
+  padding: 1em;
+  margin: 1em 0;
+}
+
+/* 4. 图片样式 - 拍立得风格 */
+img {
+  border: 1px solid var(--lightgray);
+  padding: 5px;
+  background: white;
+  box-shadow: 3px 3px 0px var(--lightgray); /* 实心阴影，像漫画 */
+  border-radius: 2px;
+}
+
+/* 5. 标题修饰 */
+h1, h2, h3 {
+  font-weight: 600;
+  letter-spacing: 0.05em; /* 稍微拉开一点字间距 */
+}
+
+/* H1 标题下面加一条手绘风格的下划线 */
+h1 {
+  border-bottom: 3px solid var(--secondary);
+  display: inline-block;
+  border-radius: 0; /* 标题不需要圆角 */
+  padding-bottom: 5px;
+  /* 这种写法可以模拟半高亮的效果 */
+  background: linear-gradient(180deg, transparent 70%, rgba(239, 124, 142, 0.2) 0);
+  width: 100%;
+}
+
+/* 6. 标签 (Tags) - 变成椭圆胶囊 */
+a.internal.tag {
+  border-radius: 50px !important;
+  border: 1px solid var(--tertiary);
+  background-color: transparent !important;
+  color: var(--tertiary) !important;
+  padding: 2px 10px;
+}
+
+a.internal.tag:hover {
+  background-color: var(--tertiary) !important;
+  color: white !important;
+}
+
+/* 7. 去除多余的分割线，保持极简 */
+hr {
+  border-top: 2px dashed var(--lightgray); /* 变成虚线 */
+  opacity: 0.5;
+}
