@@ -23,3 +23,7 @@ draft: false
 好惨
 试了一天才成功
 但终于可以做个人博客了
+
+```
+npx quartz build --serve
+```
