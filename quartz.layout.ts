@@ -36,8 +36,11 @@ export const defaultContentPageLayout: PageLayout = {
   ],
   // 左侧栏：完全隐藏（Explorer/导航树不显示）
   left: [],
-  // 右侧栏：只在桌面显示目录，移除图表和反向链接
-  right: [Component.DesktopOnly(Component.TableOfContents())],
+  // 右侧栏：保留关系图谱和目录
+  right: [
+    Component.Graph(),
+    Component.DesktopOnly(Component.TableOfContents()),
+  ],
 }
 
 // 列表页面布局 - 同样极简化
