@@ -124,6 +124,57 @@ header [role="button"] {
   display: flex;
   justify-content: center;
   gap: 2rem;
+  position: relative;
+}
+
+/* 右侧栏：关系图谱容器 */
+.sidebar.right {
+  position: relative;
+}
+
+/* 图谱显示/隐藏切换按钮 - 固定在右上角 */
+.graph-container {
+  position: fixed;
+  top: 1rem;
+  right: 1.5rem;
+  z-index: 999;
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* 图谱切换按钮样式 */
+.graph-toggle {
+  width: 40px;
+  height: 40px;
+  padding: 0.5rem;
+  border: 2px solid var(--tertiary);
+  background-color: var(--light);
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition-smooth);
+  font-size: 1.2rem;
+
+  &:hover {
+    background-color: var(--tertiary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(107, 143, 184, 0.15);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+/* 图谱组件：默认显示在右侧 */
+.graph {
+  position: sticky;
+  top: 90px;
+  max-height: calc(100vh - 110px);
+  border-radius: 8px;
+  border: 1px solid var(--lightgray);
 }
 
 /* 正文内容居中 */
@@ -345,6 +396,17 @@ table {
     max-width: 100%;
   }
 
+  /* 移动设备上隐藏关系图谱 */
+  .sidebar.right {
+    display: none;
+  }
+
+  /* 右上角按钮在移动设备上显示更明显 */
+  .graph-container {
+    top: 65px;
+    right: 1rem;
+  }
+
   article {
     margin: 2rem auto;
     padding: 0 1.5rem;
@@ -394,4 +456,75 @@ table {
       background-color: rgba(107, 143, 184, 0.06);
     }
   }
+
+  .graph-toggle {
+    border-color: var(--tertiary);
+    background-color: var(--light);
+    color: var(--dark);
+
+    &:hover {
+      background-color: var(--tertiary);
+    }
+  }
 }
+
+/* 图谱显示状态处理 */
+
+/* 图谱默认显示 */
+.sidebar.right .graph {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* 图谱隐藏状态（通过类名控制） */
+.sidebar.right.graph-hidden .graph {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* 图谱容器固定在右上角的切换按钮 */
+.sidebar.right {
+  position: relative;
+}
+
+.graph-toggle-button {
+  position: fixed;
+  top: 75px;
+  right: 1.5rem;
+  width: 40px;
+  height: 40px;
+  padding: 0.6rem;
+  border: 2px solid var(--tertiary);
+  background-color: var(--light);
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition-smooth);
+  font-size: 1rem;
+  z-index: 500;
+  color: var(--dark);
+
+  &:hover {
+    background-color: var(--tertiary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(107, 143, 184, 0.15);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+/* 图谱在右侧栏中 */
+.graph {
+  position: sticky;
+  top: 90px;
+  max-height: calc(100vh - 110px);
+  border-radius: 8px;
+  border: 1px solid var(--lightgray);
+}
+
