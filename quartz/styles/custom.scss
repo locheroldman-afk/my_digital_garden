@@ -90,24 +90,40 @@ body {
   position: relative;
 }
 
-/* 右侧栏：关系图谱容器和控制器 */
+/* 正文容器：居中布局 */
+.center {
+  flex: 1;
+  max-width: 850px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* 右侧栏：关系图谱容器 - 固定定位不占用流动空间 */
 .sidebar.right {
-  position: relative;
+  position: fixed;
+  top: 2rem;
+  right: 2rem;
+  width: 350px;
+  height: auto;
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  min-width: 300px;
+  pointer-events: none;
+  z-index: 100;
+}
+
+/* 使右侧栏内的元素可交互 */
+.sidebar.right > * {
+  pointer-events: auto;
 }
 
 /* 右上角控制面板 - 包含搜索框、暗黑模式、图谱切换 */
 .sidebar-controls {
-  position: sticky;
-  top: 2rem;
+  position: static;
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
   align-items: stretch;
-  z-index: 500;
   background-color: var(--light);
   padding: 1rem;
   border-radius: 8px;
@@ -168,17 +184,14 @@ body {
   }
 }
 
-/* 图谱组件：默认显示在右侧 */
+/* 图谱组件：限制在自身大小范围内，不填充剩余空间 */
 .graph {
   border-radius: 8px;
   border: 1px solid var(--lightgray);
-  flex: 1;
-  min-height: 400px;
-}
-
-/* 右侧栏：关系图谱容器 */
-.sidebar.right {
-  position: relative;
+  width: 350px;
+  height: 350px;
+  flex-shrink: 0;
+  overflow: hidden;
 }
 
 /* 图谱显示/隐藏切换按钮 - 固定在右上角 */
@@ -226,12 +239,7 @@ body {
   border: 1px solid var(--lightgray);
 }
 
-/* 正文内容居中 */
-.center {
-  flex: 1;
-  max-width: 850px;
-  width: 100%;
-}
+
 
 article {
   max-width: 720px;
