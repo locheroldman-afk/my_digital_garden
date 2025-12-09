@@ -4,8 +4,8 @@ import * as Component from "./quartz/components"
 // 全页面共享组件
 export const sharedPageComponents: SharedLayout = {
   head: Component.Head(),
-  // 顶部导航栏：搜索、主题切换、Reader Mode
-  header: [Component.Spacer(), Component.Search(), Component.Darkmode(), Component.ReaderMode()],
+  // 顶部导航栏：搜索、主题切换、Reader Mode 靠近左边
+  header: [Component.Search(), Component.Darkmode(), Component.ReaderMode(), Component.Spacer()],
   afterBody: [],
   // 页脚：项目链接和元信息
   footer: Component.Footer({
