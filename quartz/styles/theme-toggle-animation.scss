@@ -1,0 +1,226 @@
+/* ========================================
+   极简手绘风 - 主题切换动画系统
+   Theme Toggle Animation - Handdrawn Style
+   ======================================== */
+
+/* ==================== 主题切换容器 ==================== */
+
+.theme-toggle-wrapper {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  /* 禁用默认按钮样式 */
+  border: none;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+}
+
+.theme-toggle-wrapper:focus {
+  outline: none;
+}
+
+.theme-toggle-wrapper:focus-visible {
+  outline: 2px solid var(--light-accent, #8BA5C2);
+  outline-offset: 4px;
+  border-radius: 8px;
+}
+
+/* ==================== 太阳图标容器 ==================== */
+
+.icon-sun {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  
+  /* 初始状态：透明 + 下移 */
+  opacity: 0;
+  transform: translate(-50%, calc(-50% + 15px));
+  transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /* 保障显示 */
+  pointer-events: none;
+}
+
+/* 亮模式激活时显示太阳 */
+body:not(.dark) .icon-sun {
+  opacity: 1;
+  transform: translate(-50%, -50%);
+}
+
+/* ==================== 月亮图标容器 ==================== */
+
+.icon-moon {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  
+  /* 初始状态：透明 + 下移 */
+  opacity: 0;
+  transform: translate(-50%, calc(-50% + 15px));
+  transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /* 保障显示 */
+  pointer-events: none;
+}
+
+/* 暗模式激活时显示月亮 */
+body.dark .icon-moon {
+  opacity: 1;
+  transform: translate(-50%, -50%);
+}
+
+/* ==================== SVG 笔触动画 ==================== */
+
+/* 太阳光线动画：逐渐变亮 */
+body:not(.dark) .sun-ray {
+  stroke: #FFD700;
+  opacity: 0.6;
+  transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+              stroke 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body:not(.dark) .icon-sun:hover .sun-ray {
+  opacity: 1;
+  stroke: #FFC700;
+}
+
+/* 太阳圆心 */
+body:not(.dark) .sun-circle {
+  fill: #FFD700;
+  opacity: 0.8;
+  transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+              fill 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body:not(.dark) .icon-sun:hover .sun-circle {
+  opacity: 1;
+  fill: #FFC700;
+}
+
+/* 月亮笔触 */
+body.dark .moon-stroke {
+  stroke: #C9B5A0;
+  stroke-opacity: 0.7;
+  transition: stroke-opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+              stroke 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body.dark .icon-moon:hover .moon-stroke {
+  stroke-opacity: 0.9;
+  stroke: #D4C5B0;
+}
+
+/* ==================== 按钮 Hover 效果 ==================== */
+
+.theme-toggle-wrapper:hover {
+  /* 轻微缩放 */
+  transform: scale(1.08);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.theme-toggle-wrapper:active {
+  transform: scale(0.96);
+  transition: transform 0.1s ease-out;
+}
+
+/* ==================== 手绘抖动动画 ==================== */
+
+@keyframes handdrawn-wobble-sun {
+  0%, 100% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  25% {
+    transform: translate(-50.8%, -50%) rotate(0.5deg);
+  }
+  50% {
+    transform: translate(-50%, -50.5%) rotate(0deg);
+  }
+  75% {
+    transform: translate(-49.8%, -50%) rotate(-0.5deg);
+  }
+}
+
+@keyframes handdrawn-wobble-moon {
+  0%, 100% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  25% {
+    transform: translate(-50.5%, -50.3%) rotate(-0.3deg);
+  }
+  50% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  75% {
+    transform: translate(-49.8%, -49.8%) rotate(0.3deg);
+  }
+}
+
+/* 可选：启用抖动效果的变体 */
+.theme-toggle-wrapper.wobble .icon-sun {
+  animation: handdrawn-wobble-sun 2s ease-in-out infinite;
+}
+
+.theme-toggle-wrapper.wobble .icon-moon {
+  animation: handdrawn-wobble-moon 2s ease-in-out infinite;
+}
+
+/* ==================== 响应式调整 ==================== */
+
+@media (max-width: 768px) {
+  .theme-toggle-wrapper {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .icon-sun,
+  .icon-moon {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+/* ==================== 减少动画模式支持 ==================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .icon-sun,
+  .icon-moon,
+  .sun-ray,
+  .sun-circle,
+  .moon-stroke {
+    transition: none;
+    animation: none;
+  }
+  
+  .theme-toggle-wrapper:hover {
+    transform: none;
+  }
+}
+
+/* ==================== 暗黑模式背景过渡 ==================== */
+
+body {
+  transition: background-color 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+              color 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ==================== 打印样式 ==================== */
+
+@media print {
+  .theme-toggle-wrapper {
+    display: none;
+  }
+}
