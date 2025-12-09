@@ -24,7 +24,7 @@ export const sharedPageComponents: SharedLayout = {
   }),
 }
 
-// 单页面布局 - 极简化：只显示核心内容，左右侧边栏隐藏
+// 单页面布局 - 极简化：只显示核心内容
 export const defaultContentPageLayout: PageLayout = {
   beforeBody: [
     // 只在非首页显示面包屑
@@ -34,8 +34,10 @@ export const defaultContentPageLayout: PageLayout = {
     }),
     Component.ArticleTitle(),
   ],
-  // 左侧栏：完全隐藏（Explorer/导航树不显示）
-  left: [],
+  // 左侧栏：悬浮文件树（通过CSS隐藏/显示）
+  left: [
+    Component.Explorer(),
+  ],
   // 右侧栏：保留关系图谱和目录
   right: [
     Component.Graph(),

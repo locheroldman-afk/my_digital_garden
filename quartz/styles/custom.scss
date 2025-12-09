@@ -1,6 +1,70 @@
 @use "./base.scss";
 
-/* ==================== 手绘极简设计系统 ==================== */
+/* ==================== 悬浮左侧栏：文件夹/目录隐藏显示 ==================== */
+
+/* 左侧栏容器：默认隐藏，悬浮定位 */
+.sidebar.left {
+  position: fixed !important;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 250px;
+  background-color: var(--light);
+  border-right: 2px solid var(--lightgray);
+  border-radius: 0 12px 12px 0;
+  box-shadow: -2px 0 8px rgba(0, 0, 0, 0.08);
+  overflow-y: auto;
+  padding: 1.5rem 0;
+  z-index: 100;
+  
+  /* 默认状态：向左隐藏90% */
+  transform: translateX(-90%);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  opacity: 0.8;
+
+  /* 光标悬浮时显示 */
+  &:hover {
+    transform: translateX(0);
+    opacity: 1;
+    box-shadow: 2px 0 12px rgba(0, 0, 0, 0.12);
+  }
+
+  /* 为了让悬浮区域更容易触发，添加一个隐形触发区 */
+  &::before {
+    content: "";
+    position: absolute;
+    left: -20px;
+    top: 0;
+    width: 20px;
+    height: 100%;
+    cursor: pointer;
+  }
+}
+
+/* 防止在左侧栏内光标移出时立即隐藏 */
+.sidebar.left:hover,
+.sidebar.left:focus-within {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+/* 响应式：在移动设备上禁用悬浮效果 */
+@media (max-width: 1024px) {
+  .sidebar.left {
+    width: 220px;
+    transform: translateX(-100%);
+
+    &::before {
+      display: none;
+    }
+
+    &:hover {
+      transform: translateX(0);
+    }
+  }
+}
+
+/* 手绘极简设计系统 */
 
 /* 字体堆栈：正文干净易读，标题轻微手写味 */
 :root {
