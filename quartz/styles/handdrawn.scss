@@ -1,0 +1,407 @@
+/* ========================================
+   极简手绘风设计系统 - 样式库
+   Design System: Minimal Handdrawn Aesthetic
+   ======================================== */
+
+/* ==================== 基础变量定义 ==================== */
+
+:root {
+  /* 颜色变量 */
+  --white: #FFFFFF;
+  --ivory: #FAFAF8;
+  --light-gray: #E8E6E1;
+  --gray: #9A9691;
+  --pencil-gray: #5A5550;
+  --dark-text: #2B2620;
+  --mist-blue: #D4DFE8;
+  --soft-blue: #8BA5C2;
+  --deep-blue: #5B7D99;
+
+  /* 排版变量 */
+  --font-header: "Caveat", "Segoe UI", cursive, sans-serif;
+  --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-code: "IBM Plex Mono", monospace;
+
+  /* 间距系统 */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 2.5rem;
+  --spacing-2xl: 3rem;
+  --spacing-3xl: 4rem;
+
+  /* 圆角系统 */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+
+  /* 阴影系统 */
+  --shadow-light: 0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow-medium: 0 4px 12px rgba(91, 125, 153, 0.15);
+  --shadow-hover: 0 8px 24px rgba(91, 125, 153, 0.1);
+
+  /* 过渡系统 */
+  --transition-fast: 0.2s ease-out;
+  --transition-normal: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  --transition-slow: 0.4s ease-out;
+
+  /* 手绘线条定义 */
+  --handdrawn-width: 1.5px;
+  --handdrawn-color: var(--pencil-gray);
+  --handdrawn-dash: 2px, 2px;
+}
+
+/* ==================== 全局排版 ==================== */
+
+body {
+  font-family: var(--font-body);
+  color: var(--dark-text);
+  background-color: var(--white);
+  line-height: 1.8;
+  letter-spacing: 0.3px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 标题层级 */
+h1 {
+  font-family: var(--font-header);
+  font-size: 2.5rem;
+  font-weight: 400;
+  line-height: 1.3;
+  margin: var(--spacing-2xl) 0 var(--spacing-lg) 0;
+  color: var(--dark-text);
+  letter-spacing: 0.5px;
+}
+
+h2 {
+  font-family: var(--font-header);
+  font-size: 2rem;
+  font-weight: 400;
+  line-height: 1.4;
+  margin: var(--spacing-2xl) 0 var(--spacing-md) 0;
+  color: var(--dark-text);
+}
+
+h3 {
+  font-family: var(--font-header);
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 1.5;
+  margin: var(--spacing-lg) 0 var(--spacing-md) 0;
+  color: var(--dark-text);
+}
+
+h4, h5, h6 {
+  font-family: var(--font-body);
+  font-weight: 500;
+  margin: var(--spacing-lg) 0 var(--spacing-sm) 0;
+  color: var(--dark-text);
+}
+
+p {
+  margin: 0 0 var(--spacing-lg) 0;
+  line-height: 1.8;
+}
+
+/* 代码文本 */
+code {
+  font-family: var(--font-code);
+  font-size: 0.9em;
+  color: var(--soft-blue);
+  background-color: var(--ivory);
+  padding: 0.2em 0.4em;
+  border-radius: var(--radius-sm);
+}
+
+pre {
+  background-color: var(--ivory);
+  border: 1px solid var(--light-gray);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-md);
+  overflow-x: auto;
+  margin: var(--spacing-lg) 0;
+}
+
+/* ==================== 链接与交互元素 ==================== */
+
+a {
+  color: var(--soft-blue);
+  text-decoration: none;
+  transition: var(--transition-normal);
+  position: relative;
+}
+
+a:hover {
+  color: var(--deep-blue);
+  text-decoration: underline;
+  text-decoration-style: wavy;
+  text-underline-offset: 4px;
+}
+
+/* 手绘风格按钮 */
+button,
+.btn {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: var(--handdrawn-width) solid var(--handdrawn-color);
+  border-radius: var(--radius-md);
+  background-color: var(--white);
+  color: var(--dark-text);
+  cursor: pointer;
+  transition: var(--transition-normal);
+  position: relative;
+  overflow: hidden;
+
+  /* 手绘边框模拟 */
+  box-shadow: inset 0 0 0 1px var(--handdrawn-color);
+}
+
+button:hover,
+.btn:hover {
+  background-color: var(--soft-blue);
+  color: var(--white);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-medium), inset 0 0 0 1px var(--soft-blue);
+}
+
+button:active,
+.btn:active {
+  transform: translateY(0);
+}
+
+/* ==================== 卡片与容器 ==================== */
+
+.card {
+  background-color: var(--ivory);
+  border: var(--handdrawn-width) solid var(--mist-blue);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-md);
+  box-shadow: var(--shadow-light);
+  transition: var(--transition-slow);
+}
+
+.card:hover {
+  border-color: var(--soft-blue);
+  box-shadow: var(--shadow-hover);
+}
+
+/* 便签风格框 */
+.note-box {
+  background-color: var(--ivory);
+  border: 2px dashed var(--pencil-gray);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-md);
+  position: relative;
+  box-shadow: 
+    1px 1px 0 rgba(0, 0, 0, 0.05),
+    2px 2px 0 rgba(0, 0, 0, 0.03);
+  transform: rotate(-0.5deg);
+}
+
+.note-box::before {
+  content: "";
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 8px;
+  height: 8px;
+  background-color: var(--soft-blue);
+  border-radius: 50%;
+  opacity: 0.6;
+}
+
+/* ==================== 分隔线（手绘风格） ==================== */
+
+hr {
+  border: none;
+  height: 1px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--pencil-gray),
+    var(--pencil-gray) 2px,
+    transparent 2px,
+    transparent 6px
+  );
+  margin: var(--spacing-2xl) 0;
+}
+
+/* 手绘分隔线变体 */
+.divider-wavy {
+  position: relative;
+  height: 20px;
+  margin: var(--spacing-2xl) 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 20'%3E%3Cpath d='M 0 10 Q 5 5, 10 10 T 20 10' stroke='%235A5550' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+    background-repeat: repeat-x;
+    background-size: 20px 2px;
+  }
+}
+
+/* ==================== 表单元素 ==================== */
+
+input, textarea, select {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  padding: var(--spacing-sm);
+  border: var(--handdrawn-width) solid var(--light-gray);
+  border-radius: var(--radius-sm);
+  background-color: var(--white);
+  color: var(--dark-text);
+  transition: var(--transition-normal);
+
+  &:focus {
+    outline: none;
+    border-color: var(--soft-blue);
+    box-shadow: 0 0 0 3px rgba(139, 165, 194, 0.1);
+  }
+}
+
+input::placeholder {
+  color: var(--gray);
+  font-style: italic;
+}
+
+/* ==================== 列表与表格 ==================== */
+
+ul, ol {
+  margin: var(--spacing-lg) 0;
+  padding-left: var(--spacing-md);
+}
+
+li {
+  margin: var(--spacing-sm) 0;
+  line-height: 1.8;
+}
+
+/* 列表项前的手绘点 */
+ul > li::marker {
+  color: var(--soft-blue);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: var(--spacing-lg) 0;
+  font-size: 0.95rem;
+}
+
+th {
+  background-color: var(--ivory);
+  border-bottom: 2px solid var(--pencil-gray);
+  padding: var(--spacing-sm);
+  text-align: left;
+  font-weight: 500;
+}
+
+td {
+  border-bottom: 1px solid var(--light-gray);
+  padding: var(--spacing-sm);
+}
+
+tr:hover {
+  background-color: rgba(139, 165, 194, 0.05);
+}
+
+/* ==================== 配色工具类 ==================== */
+
+.text-muted {
+  color: var(--gray);
+}
+
+.text-accent {
+  color: var(--soft-blue);
+}
+
+.text-primary {
+  color: var(--dark-text);
+}
+
+.bg-ivory {
+  background-color: var(--ivory);
+}
+
+.border-handdrawn {
+  border: var(--handdrawn-width) solid var(--handdrawn-color);
+}
+
+/* ==================== 响应式调整 ==================== */
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  h3 {
+    font-size: 1.25rem;
+  }
+
+  body {
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+
+  :root {
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+    --spacing-2xl: 2.5rem;
+  }
+}
+
+/* ==================== 暗黑模式 ==================== */
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --white: #0f0d0a;
+    --ivory: #1A1715;
+    --light-gray: #3A3530;
+    --dark-text: #F5F1E8;
+  }
+
+  body {
+    background-color: #0f0d0a;
+    color: #F5F1E8;
+  }
+
+  .card, .note-box {
+    background-color: #1A1715;
+    border-color: rgba(139, 165, 194, 0.2);
+  }
+
+  input, textarea, select {
+    background-color: #1A1715;
+    border-color: #3A3530;
+    color: #F5F1E8;
+  }
+}
+
+/* ==================== 打印样式 ==================== */
+
+@media print {
+  body {
+    background-color: white;
+    color: black;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: underline;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+}
