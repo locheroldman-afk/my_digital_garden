@@ -73,10 +73,48 @@
   --transition-smooth: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-/* ==================== 留白与间距 ==================== */
+/* ==================== 整体布局：顶部固定导航 + 居中内容 ==================== */
 body {
   letter-spacing: 0.3px;
   line-height: 1.8;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 顶部导航固定显示 */
+header {
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: var(--light);
+  border-bottom: 1px solid var(--lightgray);
+  padding: 1rem 2rem;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  .search-container {
+    flex: 1;
+    max-width: 500px;
+  }
+}
+
+/* 主容器：顶部留出导航空间 */
+.page {
+  margin-top: 80px;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+
+/* 正文内容居中 */
+.center {
+  flex: 1;
+  max-width: 850px;
+  width: 100%;
 }
 
 article {
@@ -97,6 +135,8 @@ article {
     font-family: var(--font-body);
   }
 }
+
+/* ==================== 留白与间距 ==================== */
 
 /* ==================== 手绘线条风格的分隔符 ==================== */
 hr {
@@ -274,6 +314,21 @@ table {
 
 /* ==================== 响应式留白 ==================== */
 @media (max-width: 768px) {
+  header {
+    padding: 0.8rem 1rem;
+    flex-wrap: wrap;
+  }
+
+  .page {
+    margin-top: 120px;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .center {
+    max-width: 100%;
+  }
+
   article {
     margin: 2rem auto;
     padding: 0 1.5rem;

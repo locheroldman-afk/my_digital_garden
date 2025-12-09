@@ -1,12 +1,11 @@
 import { PageLayout, SharedLayout } from "./quartz/cfg"
 import * as Component from "./quartz/components"
 
-// Minimal layout: 三分区设计 - 顶部导航 / 主内容 / 底部信息
+// components shared across all pages
 export const sharedPageComponents: SharedLayout = {
   head: Component.Head(),
-  // 顶部导航区 - 只保留必要功能
+  // 顶部导航区 - 搜索框和暗黑模式始终显示
   header: [
-    Component.Spacer(),
     Component.Flex({
       components: [
         { Component: Component.Search(), grow: true },
