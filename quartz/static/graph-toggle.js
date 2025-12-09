@@ -1,54 +1,82 @@
-// 图谱显示/隐藏切换脚本
+// 将搜索框、暗黑模式按钮和图谱切换组织在右上角控制面板
 (function() {
-  let toggleButton = null;
+  let controlsPanel = null;
   
-  function setupGraphToggle() {
+  function setupRightSidebarControls() {
     const rightSidebar = document.querySelector('.sidebar.right');
     if (!rightSidebar) return;
 
-    // 移除旧按钮（如果存在）
-    const existingButton = document.querySelector('.graph-toggle-button');
-    if (existingButton) existingButton.remove();
+    // 移除旧控制面板（如果存在）
+    const existingPanel = rightSidebar.querySelector('.sidebar-controls');
+    if (existingPanel) existingPanel.remove();
 
-    // 创建切换按钮
-    toggleButton = document.createElement('button');
-    toggleButton.className = 'graph-toggle-button';
-    toggleButton.setAttribute('aria-label', 'Toggle graph');
-    toggleButton.innerHTML = '◉';
-    toggleButton.title = 'Toggle relationship graph';
-    
-    // 添加到 body 中
-    document.body.appendChild(toggleButton);
+    // 创建控制面板容器
+    controlsPanel = document.createElement('div');
+    controlsPanel.className = 'sidebar-controls';
 
-    // 从 localStorage 读取图谱的显示状态
+    // 获取或创建搜索框
+    let searchContainer = document.querySelector('.search-container');
+    if (searchContainer) {
+      // 克隆搜索框到控制面板
+      const searchClone = searchContainer.cloneNode(true);
+      controlsPanel.appendChild(searchClone);
+    }
+
+    // 创建按钮行容器
+    const buttonRow = document.createElement('div');
+    buttonRow.className = 'sidebar-controls-buttons';
+
+    // 获取或创建暗黑模式按钮
+    let darkmodeButton = document.querySelector('[class*="darkmode"]') || 
+                        document.querySelector('button[aria-label*="dark"]');
+    if (darkmodeButton) {
+      const buttonClone = darkmodeButton.cloneNode(true);
+      buttonRow.appendChild(buttonClone);
+    }
+
+    // 创建图谱切换按钮
+    const graphToggleButton = document.createElement('button');
+    graphToggleButton.className = 'graph-toggle-button';
+    graphToggleButton.setAttribute('aria-label', 'Toggle graph');
+    graphToggleButton.innerHTML = '◉';
+    graphToggleButton.title = 'Toggle relationship graph';
+
+    // 处理图谱切换
+    const handleGraphToggle = () => {
+      const isHidden = rightSidebar.classList.toggle('graph-hidden');
+      localStorage.setItem('graphHidden', isHidden);
+      graphToggleButton.style.opacity = isHidden ? '0.6' : '1';
+    };
+
+    graphToggleButton.addEventListener('click', handleGraphToggle);
+    buttonRow.appendChild(graphToggleButton);
+
+    // 添加按钮行到控制面板
+    controlsPanel.appendChild(buttonRow);
+
+    // 将控制面板插入到右侧栏最前面
+    rightSidebar.insertBefore(controlsPanel, rightSidebar.firstChild);
+
+    // 恢复之前保存的图谱隐藏状态
     const graphHidden = localStorage.getItem('graphHidden') === 'true';
     if (graphHidden) {
       rightSidebar.classList.add('graph-hidden');
-      toggleButton.style.opacity = '0.6';
+      graphToggleButton.style.opacity = '0.6';
     }
-
-    // 处理点击事件
-    const handleToggleClick = () => {
-      const isHidden = rightSidebar.classList.toggle('graph-hidden');
-      localStorage.setItem('graphHidden', isHidden);
-      toggleButton.style.opacity = isHidden ? '0.6' : '1';
-    };
-
-    toggleButton.addEventListener('click', handleToggleClick);
 
     // 清理函数
     window.addCleanup?.(() => {
-      toggleButton?.removeEventListener('click', handleToggleClick);
+      graphToggleButton?.removeEventListener('click', handleGraphToggle);
     });
   }
 
   // 在页面加载和导航时设置
-  document.addEventListener('nav', setupGraphToggle);
+  document.addEventListener('nav', setupRightSidebarControls);
   
   // 初始加载
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', setupGraphToggle);
+    document.addEventListener('DOMContentLoaded', setupRightSidebarControls);
   } else {
-    setupGraphToggle();
+    setupRightSidebarControls();
   }
 })();

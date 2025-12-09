@@ -4,15 +4,8 @@ import * as Component from "./quartz/components"
 // components shared across all pages
 export const sharedPageComponents: SharedLayout = {
   head: Component.Head(),
-  // 顶部导航区 - 搜索框和暗黑模式始终显示
-  header: [
-    Component.Flex({
-      components: [
-        { Component: Component.Search(), grow: true },
-        { Component: Component.Darkmode() },
-      ],
-    }),
-  ],
+  // 顶部导航简化 - 移除搜索框和暗黑模式按钮
+  header: [],
   afterBody: [],
   // 精简页脚 - 保留必要联系方式
   footer: Component.Footer({

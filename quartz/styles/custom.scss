@@ -81,50 +81,99 @@ body {
   flex-direction: column;
 }
 
-/* 顶部导航固定显示 */
-header {
-  position: fixed !important;
-  top: 0;
-  left: 0;
-  right: 0;
-  background-color: var(--light);
-  border-bottom: 1px solid var(--lightgray);
-  padding: 0.8rem 1.5rem;
-  z-index: 1000;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  height: auto;
-  width: fit-content;
-  left: 50%;
-  transform: translateX(-50%);
-  border-radius: 0 0 12px 12px;
-}
-
-/* 搜索框容器：限制宽度 */
-header .search-container {
-  max-width: 300px;
-  width: 300px;
-  flex-shrink: 0;
-}
-
-/* 暗黑模式按钮：固定大小 */
-header button,
-header [role="button"] {
-  flex-shrink: 0;
-  width: auto;
-  min-width: 40px;
-}
-
-/* 主容器：顶部留出导航空间 */
+/* 主容器：无顶部导航空间 */
 .page {
-  margin-top: 75px;
+  margin-top: 2rem;
   display: flex;
   justify-content: center;
   gap: 2rem;
   position: relative;
+}
+
+/* 右侧栏：关系图谱容器和控制器 */
+.sidebar.right {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-width: 300px;
+}
+
+/* 右上角控制面板 - 包含搜索框、暗黑模式、图谱切换 */
+.sidebar-controls {
+  position: sticky;
+  top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  align-items: stretch;
+  z-index: 500;
+  background-color: var(--light);
+  padding: 1rem;
+  border-radius: 8px;
+  border: 1px solid var(--lightgray);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* 搜索框：在右侧栏 */
+.sidebar-controls .search-container {
+  width: 100%;
+}
+
+.sidebar-controls input[type="search"],
+.sidebar-controls input[type="text"] {
+  width: 100%;
+  box-sizing: border-box;
+  border: 2px solid var(--darkgray);
+  border-radius: 6px;
+  padding: 0.6rem 1rem;
+  font-family: var(--font-body);
+  background-color: var(--light);
+}
+
+/* 控制按钮行 */
+.sidebar-controls-buttons {
+  display: flex;
+  gap: 0.8rem;
+  justify-content: space-between;
+}
+
+/* 暗黑模式和图谱切换按钮 */
+.sidebar-controls button,
+.sidebar-controls [role="button"],
+.graph-toggle-button {
+  flex: 1;
+  padding: 0.6rem;
+  border: 2px solid var(--tertiary);
+  background-color: var(--light);
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition-smooth);
+  font-size: 0.9rem;
+  min-height: 40px;
+  color: var(--dark);
+  font-family: var(--font-body);
+
+  &:hover {
+    background-color: var(--tertiary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(107, 143, 184, 0.15);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+/* 图谱组件：默认显示在右侧 */
+.graph {
+  border-radius: 8px;
+  border: 1px solid var(--lightgray);
+  flex: 1;
+  min-height: 400px;
 }
 
 /* 右侧栏：关系图谱容器 */
@@ -484,17 +533,17 @@ table {
   pointer-events: none;
 }
 
-/* 图谱容器固定在右上角的切换按钮 */
+/* 图谱按钮已集成到控制面板，不再需要固定定位 */
 .sidebar.right {
   position: relative;
 }
 
-.graph-toggle-button {
-  position: fixed;
-  top: 75px;
-  right: 1.5rem;
-  width: 40px;
-  height: 40px;
+/* 图谱切换按钮：现在在控制面板内 */
+.sidebar-controls .graph-toggle-button {
+  flex: 1;
+  width: auto;
+  height: auto;
+  min-height: 40px;
   padding: 0.6rem;
   border: 2px solid var(--tertiary);
   background-color: var(--light);
@@ -505,8 +554,9 @@ table {
   justify-content: center;
   transition: var(--transition-smooth);
   font-size: 1rem;
-  z-index: 500;
+  z-index: inherit;
   color: var(--dark);
+  position: static;
 
   &:hover {
     background-color: var(--tertiary);
