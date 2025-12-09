@@ -1,36 +1,45 @@
 import { PageLayout, SharedLayout } from "./quartz/cfg"
 import * as Component from "./quartz/components"
 
-// 全页面共享组件
+// components shared across all pages
 export const sharedPageComponents: SharedLayout = {
   head: Component.Head(),
-  // 顶部导航栏：搜索、主题切换、Reader Mode 靠近左边
-  header: [Component.Search(), Component.Darkmode(), Component.ReaderMode(), Component.Spacer()],
+  header: [],
   afterBody: [],
-  // 页脚：项目链接和元信息
   footer: Component.Footer({
     links: {
-      GitHub: "https://github.com/locheroldman-afk/my_digital_garden",
-      Quartz: "https://quartz.jzhao.xyz/",
+      GitHub: "https://github.com/jackyzha0/quartz",
+      "Discord Community": "https://discord.gg/cRFFHYye7t",
     },
   }),
 }
 
-// 内容页面布局：左导航 | 中心内容 | 右侧栏
+// components for pages that display a single page (e.g. a single note)
 export const defaultContentPageLayout: PageLayout = {
   beforeBody: [
-    // 面包屑导航（首页除外）
     Component.ConditionalRender({
       component: Component.Breadcrumbs(),
       condition: (page) => page.fileData.slug !== "index",
     }),
-    // 标题和元信息（日期、阅读时间等）
     Component.ArticleTitle(),
     Component.ContentMeta(),
+    Component.TagList(),
   ],
-  // 左侧栏：Obsidian 风格的文件树导航
-  left: [Component.Explorer()],
-  // 右侧栏：关系图谱 + 目录 + 反向链接
+  left: [
+    Component.PageTitle(),
+    Component.MobileOnly(Component.Spacer()),
+    Component.Flex({
+      components: [
+        {
+          Component: Component.Search(),
+          grow: true,
+        },
+        { Component: Component.Darkmode() },
+        { Component: Component.ReaderMode() },
+      ],
+    }),
+    Component.Explorer(),
+  ],
   right: [
     Component.Graph(),
     Component.DesktopOnly(Component.TableOfContents()),
@@ -38,11 +47,22 @@ export const defaultContentPageLayout: PageLayout = {
   ],
 }
 
-// 列表页面布局（标签页、文件夹等）
+// components for pages that display lists of pages (e.g. tags or folders)
 export const defaultListPageLayout: PageLayout = {
-  beforeBody: [Component.ArticleTitle()],
-  // 左侧栏保留，方便导航
-  left: [Component.Explorer()],
-  // 右侧栏显示标签或最近笔记
-  right: [Component.DesktopOnly(Component.RecentNotes({ limit: 5 }))],
+  beforeBody: [Component.Breadcrumbs(), Component.ArticleTitle(), Component.ContentMeta()],
+  left: [
+    Component.PageTitle(),
+    Component.MobileOnly(Component.Spacer()),
+    Component.Flex({
+      components: [
+        {
+          Component: Component.Search(),
+          grow: true,
+        },
+        { Component: Component.Darkmode() },
+      ],
+    }),
+    Component.Explorer(),
+  ],
+  right: [],
 }
