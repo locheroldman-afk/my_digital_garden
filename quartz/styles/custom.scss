@@ -101,7 +101,8 @@ body {
 /* 右侧栏：关系图谱容器 - 固定定位不占用流动空间 */
 .sidebar.right {
   position: fixed;
-  top: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
   right: 3.5rem;
   width: 350px;
   height: auto;
