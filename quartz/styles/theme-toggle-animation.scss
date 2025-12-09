@@ -13,7 +13,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  
+
   /* 禁用默认按钮样式 */
   border: none;
   background: transparent;
@@ -26,7 +26,7 @@
 }
 
 .theme-toggle-wrapper:focus-visible {
-  outline: 2px solid var(--light-accent, #8BA5C2);
+  outline: 2px solid var(--light-accent, #8ba5c2);
   outline-offset: 4px;
   border-radius: 8px;
 }
@@ -40,13 +40,14 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  
+
   /* 初始状态：透明 + 下移 */
   opacity: 0;
   transform: translate(-50%, calc(-50% + 15px));
-  transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
-              transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
-  
+  transition:
+    opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+
   /* 保障显示 */
   pointer-events: none;
 }
@@ -66,13 +67,14 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  
+
   /* 初始状态：透明 + 下移 */
   opacity: 0;
   transform: translate(-50%, calc(-50% + 15px));
-  transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
-              transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
-  
+  transition:
+    opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+
   /* 保障显示 */
   pointer-events: none;
 }
@@ -87,41 +89,44 @@
 
 /* 太阳光线动画：逐渐变亮 */
 :root:not([saved-theme="dark"]) .sun-ray {
-  stroke: #FFD700;
+  stroke: #ffd700;
   opacity: 0.6;
-  transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
-              stroke 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  transition:
+    opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+    stroke 0.7s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 :root:not([saved-theme="dark"]) .icon-sun:hover .sun-ray {
   opacity: 1;
-  stroke: #FFC700;
+  stroke: #ffc700;
 }
 
 /* 太阳圆心 */
 :root:not([saved-theme="dark"]) .sun-circle {
-  fill: #FFD700;
+  fill: #ffd700;
   opacity: 0.8;
-  transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
-              fill 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  transition:
+    opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+    fill 0.7s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 :root:not([saved-theme="dark"]) .icon-sun:hover .sun-circle {
   opacity: 1;
-  fill: #FFC700;
+  fill: #ffc700;
 }
 
 /* 月亮笔触 */
 :root[saved-theme="dark"] .moon-stroke {
-  stroke: #C9B5A0;
+  stroke: #c9b5a0;
   stroke-opacity: 0.7;
-  transition: stroke-opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
-              stroke 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  transition:
+    stroke-opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+    stroke 0.7s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 :root[saved-theme="dark"] .icon-moon:hover .moon-stroke {
   stroke-opacity: 0.9;
-  stroke: #D4C5B0;
+  stroke: #d4c5b0;
 }
 
 /* ==================== 按钮 Hover 效果 ==================== */
@@ -140,7 +145,8 @@
 /* ==================== 手绘抖动动画 ==================== */
 
 @keyframes handdrawn-wobble-sun {
-  0%, 100% {
+  0%,
+  100% {
     transform: translate(-50%, -50%) rotate(0deg);
   }
   25% {
@@ -155,7 +161,8 @@
 }
 
 @keyframes handdrawn-wobble-moon {
-  0%, 100% {
+  0%,
+  100% {
     transform: translate(-50%, -50%) rotate(0deg);
   }
   25% {
@@ -185,7 +192,7 @@
     width: 50px;
     height: 50px;
   }
-  
+
   .icon-sun,
   .icon-moon {
     width: 24px;
@@ -204,7 +211,7 @@
     transition: none;
     animation: none;
   }
-  
+
   .theme-toggle-wrapper:hover {
     transform: none;
   }
@@ -213,8 +220,9 @@
 /* ==================== 暗黑模式背景过渡 ==================== */
 
 body {
-  transition: background-color 0.7s cubic-bezier(0.4, 0, 0.2, 1),
-              color 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  transition:
+    background-color 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+    color 0.7s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* ==================== 打印样式 ==================== */

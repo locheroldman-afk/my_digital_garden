@@ -7,15 +7,15 @@
 
 :root {
   /* 颜色变量 */
-  --white: #FFFFFF;
-  --ivory: #FAFAF8;
-  --light-gray: #E8E6E1;
-  --gray: #9A9691;
-  --pencil-gray: #5A5550;
-  --dark-text: #2B2620;
-  --mist-blue: #D4DFE8;
-  --soft-blue: #8BA5C2;
-  --deep-blue: #5B7D99;
+  --white: #ffffff;
+  --ivory: #fafaf8;
+  --light-gray: #e8e6e1;
+  --gray: #9a9691;
+  --pencil-gray: #5a5550;
+  --dark-text: #2b2620;
+  --mist-blue: #d4dfe8;
+  --soft-blue: #8ba5c2;
+  --deep-blue: #5b7d99;
 
   /* 排版变量 */
   --font-header: "Caveat", "Segoe UI", cursive, sans-serif;
@@ -92,7 +92,9 @@ h3 {
   color: var(--dark-text);
 }
 
-h4, h5, h6 {
+h4,
+h5,
+h6 {
   font-family: var(--font-body);
   font-weight: 500;
   margin: var(--spacing-lg) 0 var(--spacing-sm) 0;
@@ -163,7 +165,9 @@ button:hover,
   background-color: var(--soft-blue);
   color: var(--white);
   transform: translateY(-2px);
-  box-shadow: var(--shadow-medium), inset 0 0 0 1px var(--soft-blue);
+  box-shadow:
+    var(--shadow-medium),
+    inset 0 0 0 1px var(--soft-blue);
 }
 
 button:active,
@@ -194,7 +198,7 @@ button:active,
   border-radius: var(--radius-md);
   padding: var(--spacing-md);
   position: relative;
-  box-shadow: 
+  box-shadow:
     1px 1px 0 rgba(0, 0, 0, 0.05),
     2px 2px 0 rgba(0, 0, 0, 0.03);
   transform: rotate(-0.5deg);
@@ -249,7 +253,9 @@ hr {
 
 /* ==================== 表单元素 ==================== */
 
-input, textarea, select {
+input,
+textarea,
+select {
   font-family: var(--font-body);
   font-size: 1rem;
   padding: var(--spacing-sm);
@@ -273,7 +279,8 @@ input::placeholder {
 
 /* ==================== 列表与表格 ==================== */
 
-ul, ol {
+ul,
+ol {
   margin: var(--spacing-lg) 0;
   padding-left: var(--spacing-md);
 }
@@ -366,25 +373,28 @@ tr:hover {
 @media (prefers-color-scheme: dark) {
   :root {
     --white: #0f0d0a;
-    --ivory: #1A1715;
-    --light-gray: #3A3530;
-    --dark-text: #F5F1E8;
+    --ivory: #1a1715;
+    --light-gray: #3a3530;
+    --dark-text: #f5f1e8;
   }
 
   body {
     background-color: #0f0d0a;
-    color: #F5F1E8;
+    color: #f5f1e8;
   }
 
-  .card, .note-box {
-    background-color: #1A1715;
+  .card,
+  .note-box {
+    background-color: #1a1715;
     border-color: rgba(139, 165, 194, 0.2);
   }
 
-  input, textarea, select {
-    background-color: #1A1715;
-    border-color: #3A3530;
-    color: #F5F1E8;
+  input,
+  textarea,
+  select {
+    background-color: #1a1715;
+    border-color: #3a3530;
+    color: #f5f1e8;
   }
 }
 

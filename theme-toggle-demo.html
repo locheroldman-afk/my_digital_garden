@@ -1,356 +1,407 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>极简手绘风 - 主题切换动画演示</title>
-  <style>
-    /* ==================== 基础样式 ==================== */
-    
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    
-    body {
-      font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background-color: #FFFFFF;
-      color: #2B2620;
-      transition: background-color 0.7s cubic-bezier(0.4, 0, 0.2, 1),
-                  color 0.7s cubic-bezier(0.4, 0, 0.2, 1);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem;
-    }
-    
-    body.dark {
-      background-color: #0F0D0A;
-      color: #F5F1E8;
-    }
-    
-    /* ==================== 主题切换按钮 ==================== */
-    
-    .theme-toggle-wrapper {
-      position: relative;
-      width: 60px;
-      height: 60px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      
-      border: none;
-      background: transparent;
-      padding: 0;
-      margin: 0;
-      
-      border-radius: 12px;
-      transition: background-color 0.3s ease;
-    }
-    
-    .theme-toggle-wrapper:hover {
-      background-color: rgba(139, 165, 194, 0.1);
-      transform: scale(1.08);
-      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-    }
-    
-    body.dark .theme-toggle-wrapper:hover {
-      background-color: rgba(139, 165, 194, 0.15);
-    }
-    
-    .theme-toggle-wrapper:active {
-      transform: scale(0.96);
-      transition: transform 0.1s ease-out;
-    }
-    
-    .theme-toggle-wrapper:focus {
-      outline: none;
-    }
-    
-    .theme-toggle-wrapper:focus-visible {
-      outline: 2px solid #8BA5C2;
-      outline-offset: 4px;
-    }
-    
-    /* ==================== 图标容器 ==================== */
-    
-    .icon-sun,
-    .icon-moon {
-      position: absolute;
-      width: 28px;
-      height: 28px;
-      top: 50%;
-      left: 50%;
-      
-      opacity: 0;
-      transform: translate(-50%, calc(-50% + 15px));
-      transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
-                  transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
-      
-      pointer-events: none;
-    }
-    
-    /* 亮模式：显示太阳 */
-    body:not(.dark) .icon-sun {
-      opacity: 1;
-      transform: translate(-50%, -50%);
-    }
-    
-    /* 暗模式：显示月亮 */
-    body.dark .icon-moon {
-      opacity: 1;
-      transform: translate(-50%, -50%);
-    }
-    
-    /* ==================== SVG 样式 ==================== */
-    
-    .sun-ray {
-      stroke: #FFD700;
-      opacity: 0.6;
-      transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    
-    body:not(.dark) .icon-sun:hover .sun-ray {
-      opacity: 1;
-    }
-    
-    .sun-circle {
-      fill: #FFD700;
-      opacity: 0.8;
-      transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    
-    body:not(.dark) .icon-sun:hover .sun-circle {
-      opacity: 1;
-    }
-    
-    .moon-stroke {
-      stroke: #C9B5A0;
-      stroke-opacity: 0.7;
-      transition: stroke-opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    
-    body.dark .icon-moon:hover .moon-stroke {
-      stroke-opacity: 0.9;
-    }
-    
-    /* ==================== 页面内容 ==================== */
-    
-    .content {
-      text-align: center;
-      max-width: 600px;
-      margin-top: 2rem;
-    }
-    
-    h1 {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-      font-weight: 600;
-    }
-    
-    p {
-      font-size: 1rem;
-      line-height: 1.8;
-      color: #9A9691;
-      margin-bottom: 0.8rem;
-    }
-    
-    body.dark p {
-      color: #8A8178;
-    }
-    
-    .feature-list {
-      list-style: none;
-      margin: 2rem 0;
-      padding: 0;
-    }
-    
-    .feature-list li {
-      padding: 0.5rem 0;
-      font-size: 0.95rem;
-    }
-    
-    .feature-list li::before {
-      content: "✓ ";
-      color: #8BA5C2;
-      font-weight: bold;
-      margin-right: 0.5rem;
-    }
-    
-    /* ==================== 减少动画模式 ==================== */
-    
-    @media (prefers-reduced-motion: reduce) {
-      .icon-sun,
-      .icon-moon,
-      .sun-ray,
-      .sun-circle,
-      .moon-stroke,
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>极简手绘风 - 主题切换动画演示</title>
+    <style>
+      /* ==================== 基础样式 ==================== */
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
       body {
-        transition: none;
+        font-family:
+          "Inter",
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+        background-color: #ffffff;
+        color: #2b2620;
+        transition:
+          background-color 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+          color 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
       }
-      
+
+      body.dark {
+        background-color: #0f0d0a;
+        color: #f5f1e8;
+      }
+
+      /* ==================== 主题切换按钮 ==================== */
+
+      .theme-toggle-wrapper {
+        position: relative;
+        width: 60px;
+        height: 60px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        border: none;
+        background: transparent;
+        padding: 0;
+        margin: 0;
+
+        border-radius: 12px;
+        transition: background-color 0.3s ease;
+      }
+
       .theme-toggle-wrapper:hover {
-        transform: none;
+        background-color: rgba(139, 165, 194, 0.1);
+        transform: scale(1.08);
+        transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
       }
-    }
-  </style>
-</head>
-<body>
-  <!-- 主题切换按钮 -->
-  <button class="theme-toggle-wrapper" aria-label="Toggle dark mode" title="Click to toggle theme">
-    <!-- 太阳图标 -->
-    <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
-      <!-- 太阳圆心 -->
-      <circle class="sun-circle" cx="14" cy="14" r="5" fill="#FFD700" />
-      <!-- 光线 -->
-      <line class="sun-ray" x1="14" y1="3" x2="14" y2="5" stroke="#FFD700" />
-      <line class="sun-ray" x1="14" y1="23" x2="14" y2="25" stroke="#FFD700" />
-      <line class="sun-ray" x1="3" y1="14" x2="5" y2="14" stroke="#FFD700" />
-      <line class="sun-ray" x1="23" y1="14" x2="25" y2="14" stroke="#FFD700" />
-      <line class="sun-ray" x1="6.2" y1="6.2" x2="7.8" y2="7.8" stroke="#FFD700" />
-      <line class="sun-ray" x1="20.2" y1="20.2" x2="21.8" y2="21.8" stroke="#FFD700" />
-      <line class="sun-ray" x1="21.8" y1="6.2" x2="20.2" y2="7.8" stroke="#FFD700" />
-      <line class="sun-ray" x1="7.8" y1="20.2" x2="6.2" y2="21.8" stroke="#FFD700" />
-    </svg>
-    
-    <!-- 月亮图标 -->
-    <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28" fill="none" stroke="currentColor">
-      <!-- 毛笔风弯月 -->
-      <path class="moon-stroke" d="M 8 10 Q 6 14 8 18 Q 13 22 18 20 Q 20 18 20 14 Q 20 10 18 8 Q 13 6 8 10" stroke="#C9B5A0" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.75" />
-      <!-- 月亮内部阴影 -->
-      <path class="moon-stroke" d="M 10 12 Q 12 14 11 16" stroke="#C9B5A0" stroke-width="0.8" fill="none" stroke-linecap="round" opacity="0.4" />
-      <!-- 发光效果 -->
-      <circle cx="19" cy="10" r="2" fill="none" stroke="#C9B5A0" stroke-width="0.6" opacity="0.3" />
-    </svg>
-  </button>
-  
-  <!-- 页面内容 -->
-  <div class="content">
-    <h1>极简手绘风 · 主题切换</h1>
-    <p>点击上方按钮，观察太阳和月亮的升起动画</p>
-    
-    <ul class="feature-list">
-      <li>极简手绘风设计</li>
-      <li>平滑的 0.7s 过渡动画</li>
-      <li>完整的无障碍支持</li>
-      <li>响应式设计</li>
-      <li>支持减少动画模式</li>
-    </ul>
-    
-    <p style="margin-top: 2rem; font-size: 0.9rem; opacity: 0.6;">
-      当前模式：<strong><span id="theme-status">亮模式</span></strong>
-    </p>
-  </div>
-  
-  <!-- JavaScript 脚本 -->
-  <script>
-    /**
-     * 主题切换函数
-     * 兼容 Quartz 默认的 html.dark 逻辑
-     */
-    function toggleTheme() {
-      const html = document.documentElement;
-      const body = document.body;
-      const isDark = body.classList.contains('dark');
-      
-      if (isDark) {
-        body.classList.remove('dark');
-        html.removeAttribute('data-theme');
-        localStorage.setItem('theme', 'light');
-      } else {
-        body.classList.add('dark');
-        html.setAttribute('data-theme', 'dark');
-        localStorage.setItem('theme', 'dark');
+
+      body.dark .theme-toggle-wrapper:hover {
+        background-color: rgba(139, 165, 194, 0.15);
       }
-      
-      // 更新状态显示
-      updateThemeStatus();
-    }
-    
-    /**
-     * 更新主题状态显示
-     */
-    function updateThemeStatus() {
-      const isDark = document.body.classList.contains('dark');
-      const statusEl = document.getElementById('theme-status');
-      if (statusEl) {
-        statusEl.textContent = isDark ? '暗模式' : '亮模式';
+
+      .theme-toggle-wrapper:active {
+        transform: scale(0.96);
+        transition: transform 0.1s ease-out;
       }
-    }
-    
-    /**
-     * 初始化主题
-     */
-    function initTheme() {
-      const saved = localStorage.getItem('theme');
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      const shouldBeDark = saved === 'dark' || (saved === null && prefersDark);
-      
-      if (shouldBeDark) {
-        document.body.classList.add('dark');
-        document.documentElement.setAttribute('data-theme', 'dark');
+
+      .theme-toggle-wrapper:focus {
+        outline: none;
       }
-      
-      updateThemeStatus();
-    }
-    
-    /**
-     * 绑定按钮点击事件
-     */
-    function setupToggle() {
-      const button = document.querySelector('.theme-toggle-wrapper');
-      if (button) {
-        button.addEventListener('click', toggleTheme);
-        
-        // 键盘支持
-        button.addEventListener('keydown', (e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            toggleTheme();
-          }
-        });
+
+      .theme-toggle-wrapper:focus-visible {
+        outline: 2px solid #8ba5c2;
+        outline-offset: 4px;
       }
-    }
-    
-    /**
-     * 监听系统主题变化
-     */
-    function watchSystemTheme() {
-      if (window.matchMedia) {
-        const darkModeQuery = window.matchMedia('(prefers-color-scheme: dark)');
-        darkModeQuery.addEventListener('change', (e) => {
-          // 只在用户未手动设置时才跟随系统
-          if (!localStorage.getItem('theme')) {
-            if (e.matches) {
-              document.body.classList.add('dark');
-            } else {
-              document.body.classList.remove('dark');
+
+      /* ==================== 图标容器 ==================== */
+
+      .icon-sun,
+      .icon-moon {
+        position: absolute;
+        width: 28px;
+        height: 28px;
+        top: 50%;
+        left: 50%;
+
+        opacity: 0;
+        transform: translate(-50%, calc(-50% + 15px));
+        transition:
+          opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+          transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+
+        pointer-events: none;
+      }
+
+      /* 亮模式：显示太阳 */
+      body:not(.dark) .icon-sun {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+      }
+
+      /* 暗模式：显示月亮 */
+      body.dark .icon-moon {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+      }
+
+      /* ==================== SVG 样式 ==================== */
+
+      .sun-ray {
+        stroke: #ffd700;
+        opacity: 0.6;
+        transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      body:not(.dark) .icon-sun:hover .sun-ray {
+        opacity: 1;
+      }
+
+      .sun-circle {
+        fill: #ffd700;
+        opacity: 0.8;
+        transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      body:not(.dark) .icon-sun:hover .sun-circle {
+        opacity: 1;
+      }
+
+      .moon-stroke {
+        stroke: #c9b5a0;
+        stroke-opacity: 0.7;
+        transition: stroke-opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      body.dark .icon-moon:hover .moon-stroke {
+        stroke-opacity: 0.9;
+      }
+
+      /* ==================== 页面内容 ==================== */
+
+      .content {
+        text-align: center;
+        max-width: 600px;
+        margin-top: 2rem;
+      }
+
+      h1 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+        font-weight: 600;
+      }
+
+      p {
+        font-size: 1rem;
+        line-height: 1.8;
+        color: #9a9691;
+        margin-bottom: 0.8rem;
+      }
+
+      body.dark p {
+        color: #8a8178;
+      }
+
+      .feature-list {
+        list-style: none;
+        margin: 2rem 0;
+        padding: 0;
+      }
+
+      .feature-list li {
+        padding: 0.5rem 0;
+        font-size: 0.95rem;
+      }
+
+      .feature-list li::before {
+        content: "✓ ";
+        color: #8ba5c2;
+        font-weight: bold;
+        margin-right: 0.5rem;
+      }
+
+      /* ==================== 减少动画模式 ==================== */
+
+      @media (prefers-reduced-motion: reduce) {
+        .icon-sun,
+        .icon-moon,
+        .sun-ray,
+        .sun-circle,
+        .moon-stroke,
+        body {
+          transition: none;
+        }
+
+        .theme-toggle-wrapper:hover {
+          transform: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 主题切换按钮 -->
+    <button
+      class="theme-toggle-wrapper"
+      aria-label="Toggle dark mode"
+      title="Click to toggle theme"
+    >
+      <!-- 太阳图标 -->
+      <svg
+        class="icon-sun"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 28 28"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <!-- 太阳圆心 -->
+        <circle class="sun-circle" cx="14" cy="14" r="5" fill="#FFD700" />
+        <!-- 光线 -->
+        <line class="sun-ray" x1="14" y1="3" x2="14" y2="5" stroke="#FFD700" />
+        <line class="sun-ray" x1="14" y1="23" x2="14" y2="25" stroke="#FFD700" />
+        <line class="sun-ray" x1="3" y1="14" x2="5" y2="14" stroke="#FFD700" />
+        <line class="sun-ray" x1="23" y1="14" x2="25" y2="14" stroke="#FFD700" />
+        <line class="sun-ray" x1="6.2" y1="6.2" x2="7.8" y2="7.8" stroke="#FFD700" />
+        <line class="sun-ray" x1="20.2" y1="20.2" x2="21.8" y2="21.8" stroke="#FFD700" />
+        <line class="sun-ray" x1="21.8" y1="6.2" x2="20.2" y2="7.8" stroke="#FFD700" />
+        <line class="sun-ray" x1="7.8" y1="20.2" x2="6.2" y2="21.8" stroke="#FFD700" />
+      </svg>
+
+      <!-- 月亮图标 -->
+      <svg
+        class="icon-moon"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 28 28"
+        fill="none"
+        stroke="currentColor"
+      >
+        <!-- 毛笔风弯月 -->
+        <path
+          class="moon-stroke"
+          d="M 8 10 Q 6 14 8 18 Q 13 22 18 20 Q 20 18 20 14 Q 20 10 18 8 Q 13 6 8 10"
+          stroke="#C9B5A0"
+          stroke-width="1.5"
+          fill="none"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          opacity="0.75"
+        />
+        <!-- 月亮内部阴影 -->
+        <path
+          class="moon-stroke"
+          d="M 10 12 Q 12 14 11 16"
+          stroke="#C9B5A0"
+          stroke-width="0.8"
+          fill="none"
+          stroke-linecap="round"
+          opacity="0.4"
+        />
+        <!-- 发光效果 -->
+        <circle
+          cx="19"
+          cy="10"
+          r="2"
+          fill="none"
+          stroke="#C9B5A0"
+          stroke-width="0.6"
+          opacity="0.3"
+        />
+      </svg>
+    </button>
+
+    <!-- 页面内容 -->
+    <div class="content">
+      <h1>极简手绘风 · 主题切换</h1>
+      <p>点击上方按钮，观察太阳和月亮的升起动画</p>
+
+      <ul class="feature-list">
+        <li>极简手绘风设计</li>
+        <li>平滑的 0.7s 过渡动画</li>
+        <li>完整的无障碍支持</li>
+        <li>响应式设计</li>
+        <li>支持减少动画模式</li>
+      </ul>
+
+      <p style="margin-top: 2rem; font-size: 0.9rem; opacity: 0.6">
+        当前模式：<strong><span id="theme-status">亮模式</span></strong>
+      </p>
+    </div>
+
+    <!-- JavaScript 脚本 -->
+    <script>
+      /**
+       * 主题切换函数
+       * 兼容 Quartz 默认的 html.dark 逻辑
+       */
+      function toggleTheme() {
+        const html = document.documentElement
+        const body = document.body
+        const isDark = body.classList.contains("dark")
+
+        if (isDark) {
+          body.classList.remove("dark")
+          html.removeAttribute("data-theme")
+          localStorage.setItem("theme", "light")
+        } else {
+          body.classList.add("dark")
+          html.setAttribute("data-theme", "dark")
+          localStorage.setItem("theme", "dark")
+        }
+
+        // 更新状态显示
+        updateThemeStatus()
+      }
+
+      /**
+       * 更新主题状态显示
+       */
+      function updateThemeStatus() {
+        const isDark = document.body.classList.contains("dark")
+        const statusEl = document.getElementById("theme-status")
+        if (statusEl) {
+          statusEl.textContent = isDark ? "暗模式" : "亮模式"
+        }
+      }
+
+      /**
+       * 初始化主题
+       */
+      function initTheme() {
+        const saved = localStorage.getItem("theme")
+        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches
+        const shouldBeDark = saved === "dark" || (saved === null && prefersDark)
+
+        if (shouldBeDark) {
+          document.body.classList.add("dark")
+          document.documentElement.setAttribute("data-theme", "dark")
+        }
+
+        updateThemeStatus()
+      }
+
+      /**
+       * 绑定按钮点击事件
+       */
+      function setupToggle() {
+        const button = document.querySelector(".theme-toggle-wrapper")
+        if (button) {
+          button.addEventListener("click", toggleTheme)
+
+          // 键盘支持
+          button.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault()
+              toggleTheme()
             }
-            updateThemeStatus();
-          }
-        });
+          })
+        }
       }
-    }
-    
-    // 页面加载完成后初始化
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', () => {
-        initTheme();
-        setupToggle();
-        watchSystemTheme();
-      });
-    } else {
-      initTheme();
-      setupToggle();
-      watchSystemTheme();
-    }
-    
-    // 暴露给全局作用域（兼容 Quartz）
-    window.toggleTheme = toggleTheme;
-  </script>
-</body>
+
+      /**
+       * 监听系统主题变化
+       */
+      function watchSystemTheme() {
+        if (window.matchMedia) {
+          const darkModeQuery = window.matchMedia("(prefers-color-scheme: dark)")
+          darkModeQuery.addEventListener("change", (e) => {
+            // 只在用户未手动设置时才跟随系统
+            if (!localStorage.getItem("theme")) {
+              if (e.matches) {
+                document.body.classList.add("dark")
+              } else {
+                document.body.classList.remove("dark")
+              }
+              updateThemeStatus()
+            }
+          })
+        }
+      }
+
+      // 页面加载完成后初始化
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", () => {
+          initTheme()
+          setupToggle()
+          watchSystemTheme()
+        })
+      } else {
+        initTheme()
+        setupToggle()
+        watchSystemTheme()
+      }
+
+      // 暴露给全局作用域（兼容 Quartz）
+      window.toggleTheme = toggleTheme
+    </script>
+  </body>
 </html>

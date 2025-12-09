@@ -10,8 +10,8 @@ import { SunIcon, MoonIcon } from "./ThemeToggleIcons"
 
 const Darkmode: QuartzComponent = ({ displayClass, cfg }: QuartzComponentProps) => {
   return (
-    <button 
-      class={classNames(displayClass, "theme-toggle-wrapper")} 
+    <button
+      class={classNames(displayClass, "theme-toggle-wrapper")}
       aria-label={i18n(cfg.locale).components.themeToggle.darkMode}
       title="Toggle dark mode"
     >

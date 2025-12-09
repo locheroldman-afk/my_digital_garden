@@ -10,7 +10,7 @@ const emitThemeChangeEvent = (theme: "light" | "dark") => {
 }
 
 // 公开的 toggleTheme API，供主题按钮调用
-window.toggleTheme = function() {
+window.toggleTheme = function () {
   const newTheme =
     document.documentElement.getAttribute("saved-theme") === "dark" ? "light" : "dark"
   document.documentElement.setAttribute("saved-theme", newTheme)
@@ -20,12 +20,16 @@ window.toggleTheme = function() {
 
 const setupThemeToggle = () => {
   // 使用 事件委托，这样即使按钮还没加载也能工作
-  document.addEventListener("click", (e: Event) => {
-    const target = e.target as HTMLElement
-    if (target?.classList.contains("theme-toggle-wrapper")) {
-      window.toggleTheme?.()
-    }
-  }, true)
+  document.addEventListener(
+    "click",
+    (e: Event) => {
+      const target = e.target as HTMLElement
+      if (target?.classList.contains("theme-toggle-wrapper")) {
+        window.toggleTheme?.()
+      }
+    },
+    true,
+  )
 }
 
 const themeChange = (e: MediaQueryListEvent) => {

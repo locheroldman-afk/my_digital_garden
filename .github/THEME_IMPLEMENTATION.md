@@ -3,6 +3,7 @@
 ## 📋 概述
 
 这套主题提供了：
+
 - ✅ 流畅的明暗模式切换动画（0.6s 柔和过渡）
 - ✅ 极简主义 + 手绘风格的完整 UI
 - ✅ 响应式设计（桌面 / 平板 / 手机）
@@ -14,11 +15,13 @@
 ## 🎨 视觉特性
 
 ### 明暗模式动画
+
 - **过渡时间**：0.6s（柔和自然）
 - **缓动函数**：`cubic-bezier(0.4, 0, 0.2, 1)`（Material Design 标准）
 - **应用范围**：背景、文字、边框、阴影、滤镜都平滑过渡
 
 ### 手绘风格元素
+
 - **线条**：1.5px 铅笔灰（亮模式 `#5A5550` / 暗模式 `#C9B5A0`）
 - **按钮**：线框风 + 手绘感边框
 - **分隔线**：虚线效果
@@ -75,10 +78,11 @@ publish/quartz/styles/
 ```
 
 或者，如果你使用自定义的加载顺序，确保导入顺序是：
+
 ```scss
-@import "./base.scss";           // Quartz 基础
-@import "./handdrawn.scss";      // 手绘风格库
-@import "./custom.scss";         // 你的自定义样式
+@import "./base.scss"; // Quartz 基础
+@import "./handdrawn.scss"; // 手绘风格库
+@import "./custom.scss"; // 你的自定义样式
 @import "./theme-transition.scss"; // 主题切换系统（最后导入，优先级最高）
 ```
 
@@ -90,10 +94,10 @@ publish/quartz/styles/
 
 ```typescript
 // 伪代码示例
-document.querySelector('.theme-toggle').addEventListener('click', () => {
-  document.body.classList.toggle('dark');
-  localStorage.setItem('theme', document.body.classList.contains('dark') ? 'dark' : 'light');
-});
+document.querySelector(".theme-toggle").addEventListener("click", () => {
+  document.body.classList.toggle("dark")
+  localStorage.setItem("theme", document.body.classList.contains("dark") ? "dark" : "light")
+})
 ```
 
 如果 Quartz 没有此功能，你可以添加一个简单的脚本：
@@ -102,32 +106,33 @@ document.querySelector('.theme-toggle').addEventListener('click', () => {
 
 ```javascript
 // 主题切换脚本
-(function() {
-  const toggleButton = document.querySelector('.theme-toggle');
-  const isDark = localStorage.getItem('theme') === 'dark' || 
-                 window.matchMedia('(prefers-color-scheme: dark)').matches;
-  
+;(function () {
+  const toggleButton = document.querySelector(".theme-toggle")
+  const isDark =
+    localStorage.getItem("theme") === "dark" ||
+    window.matchMedia("(prefers-color-scheme: dark)").matches
+
   if (isDark) {
-    document.body.classList.add('dark');
+    document.body.classList.add("dark")
   }
-  
+
   if (toggleButton) {
-    toggleButton.addEventListener('click', () => {
-      document.body.classList.toggle('dark');
-      const isDarkNow = document.body.classList.contains('dark');
-      localStorage.setItem('theme', isDarkNow ? 'dark' : 'light');
-    });
+    toggleButton.addEventListener("click", () => {
+      document.body.classList.toggle("dark")
+      const isDarkNow = document.body.classList.contains("dark")
+      localStorage.setItem("theme", isDarkNow ? "dark" : "light")
+    })
   }
-  
+
   // 监听系统主题变化
-  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (e) => {
     if (e.matches) {
-      document.body.classList.add('dark');
+      document.body.classList.add("dark")
     } else {
-      document.body.classList.remove('dark');
+      document.body.classList.remove("dark")
     }
-  });
-})();
+  })
+})()
 ```
 
 ### 第三步：更新主题切换按钮（可选）
@@ -141,12 +146,32 @@ document.querySelector('.theme-toggle').addEventListener('click', () => {
 ```html
 <button class="theme-toggle" aria-label="Toggle dark mode">
   <!-- 太阳图标 -->
-  <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-    <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+  <svg
+    class="sun-icon"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+  >
+    <circle cx="12" cy="12" r="5" />
+    <line x1="12" y1="1" x2="12" y2="3" />
+    <line x1="12" y1="21" x2="12" y2="23" />
+    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+    <line x1="1" y1="12" x2="3" y2="12" />
+    <line x1="21" y1="12" x2="23" y2="12" />
+    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
   </svg>
   <!-- 月亮图标 -->
-  <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+  <svg
+    class="moon-icon"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+  >
+    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
   </svg>
 </button>
 ```
@@ -160,16 +185,16 @@ document.querySelector('.theme-toggle').addEventListener('click', () => {
 ```scss
 :root {
   /* 亮模式颜色变量 */
-  --light-bg: #FFFFFF;           /* 主背景 */
-  --light-surface: #FAFAF8;      /* 卡片/表面 */
-  --light-border: #E8E6E1;       /* 边框 */
-  --light-text: #2B2620;         /* 正文 */
-  
+  --light-bg: #ffffff; /* 主背景 */
+  --light-surface: #fafaf8; /* 卡片/表面 */
+  --light-border: #e8e6e1; /* 边框 */
+  --light-text: #2b2620; /* 正文 */
+
   /* 暗模式颜色变量 */
-  --dark-bg: #0F0D0A;
-  --dark-surface: #1A1715;
+  --dark-bg: #0f0d0a;
+  --dark-surface: #1a1715;
   /* ... */
-  
+
   /* 统一过渡定义 */
   --theme-transition: background-color 0.6s, color 0.6s, /* ... */;
 }
@@ -279,12 +304,12 @@ body.dark img {
 
 ## 📱 响应式断点
 
-| 断点 | 设备 | 调整 |
-|------|------|------|
-| ≥ 1024px | 桌面 | 完整布局 |
-| 768px ～ 1023px | 平板 | 侧栏改为相对定位 |
-| < 768px | 手机 | 单列布局 |
-| < 480px | 小手机 | 字号缩小 |
+| 断点            | 设备   | 调整             |
+| --------------- | ------ | ---------------- |
+| ≥ 1024px        | 桌面   | 完整布局         |
+| 768px ～ 1023px | 平板   | 侧栏改为相对定位 |
+| < 768px         | 手机   | 单列布局         |
+| < 480px         | 小手机 | 字号缩小         |
 
 ---
 
@@ -295,8 +320,8 @@ body.dark img {
 ```scss
 @media (prefers-contrast: more) {
   :root {
-    --light-text: #000000;  /* 更深 */
-    --dark-text: #FFFFFF;   /* 更亮 */
+    --light-text: #000000; /* 更深 */
+    --dark-text: #ffffff; /* 更亮 */
   }
 }
 ```
@@ -358,13 +383,15 @@ body.dark img {
 ### 如何改变点睛色？
 
 找到这一行：
+
 ```scss
---light-accent: #8BA5C2;  /* 灰蓝 */
+--light-accent: #8ba5c2; /* 灰蓝 */
 ```
 
 改为你喜欢的颜色，例如：
+
 ```scss
---light-accent: #A5BFB0;  /* 淡灰绿 */
+--light-accent: #a5bfb0; /* 淡灰绿 */
 ```
 
 所有使用 `var(--light-accent)` 的元素都会自动更新。
@@ -372,18 +399,21 @@ body.dark img {
 ### 如何调整过渡速度？
 
 修改：
+
 ```scss
---theme-transition: background-color 0.6s, /* ... */
+--theme-transition: background-color 0.6s, /* ... */;
 ```
 
 改为：
+
 ```scss
---theme-transition: background-color 0.4s, /* ... */  /* 更快 */
+--theme-transition: background-color 0.4s, /* ... */ /* 更快 */;
 ```
 
 ### 如何关闭图片在暗黑模式的滤镜？
 
 找到：
+
 ```scss
 body.dark img {
   filter: brightness(0.85) contrast(1.1);
@@ -391,6 +421,7 @@ body.dark img {
 ```
 
 改为：
+
 ```scss
 body.dark img {
   filter: none;
@@ -416,6 +447,7 @@ body.dark img {
 ## 🚀 性能优化
 
 此主题已优化：
+
 - **GPU 加速**：使用 `transform` 而非 `position` 改变
 - **合成层**：必要时自动创建合成层
 - **回流/重排最小化**：预先计算样式
@@ -440,4 +472,3 @@ A：添加 `transition: none;` 到该元素。
 - [MDN: CSS Transitions](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Transitions)
 - [Quartz 4 Docs](https://quartz.jzhao.xyz/)
 - [WCAG 2.1 Guidelines](https://www.w3.org/WAI/WCAG21/quickref/)
-

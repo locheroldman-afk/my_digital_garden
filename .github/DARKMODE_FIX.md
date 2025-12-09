@@ -3,6 +3,7 @@
 ## 🐛 问题诊断
 
 ### 原始问题
+
 点击主题切换按钮无法切换为暗黑模式，页面没有任何反应。
 
 ### 根本原因分析
@@ -48,7 +49,9 @@ CSS 变量在 :root[saved-theme="dark"] 时自动更新 ✅
 ## ✅ 已完成的修复
 
 ### 1. 清理脚本 (`darkmode.inline.ts`)
+
 **移除** 了对 `body.dark` class 的所有设置
+
 ```typescript
 // ❌ 之前（错误）
 document.body.classList.toggle("dark", currentTheme === "dark")
@@ -61,6 +64,7 @@ document.documentElement.setAttribute("saved-theme", newTheme)
 ### 2. 更新 SCSS 选择器
 
 #### `theme-toggle-animation.scss`
+
 ```scss
 // ❌ 之前
 body:not(.dark) .icon-sun { ... }
@@ -72,6 +76,7 @@ body.dark .icon-moon { ... }
 ```
 
 #### `theme-transition.scss`
+
 ```scss
 // ❌ 之前
 body.dark { ... }
@@ -91,6 +96,7 @@ body.dark article { ... }
 ## 📊 现在的流程
 
 ### 页面加载
+
 ```
 1. darkmode.inline.ts 执行
 2. 检测系统偏好或 localStorage
@@ -100,6 +106,7 @@ body.dark article { ... }
 ```
 
 ### 用户点击按钮
+
 ```
 1. setupThemeToggle() 监听器触发
 2. 调用 window.toggleTheme()
@@ -110,6 +117,7 @@ body.dark article { ... }
 ```
 
 ### SPA 导航
+
 ```
 1. 新页面加载
 2. setupThemeToggle() 再次执行
@@ -121,12 +129,14 @@ body.dark article { ... }
 ## 🎯 验证修复
 
 构建并测试：
+
 ```bash
 npm run build
 npm run dev
 ```
 
 在浏览器中：
+
 1. ✅ 页面加载时显示正确的太阳/月亮
 2. ✅ 点击按钮，图标升起动画流畅
 3. ✅ 页面背景色平滑过渡到暗黑模式
@@ -135,6 +145,7 @@ npm run dev
 6. ✅ SPA 导航后按钮仍然工作
 
 控制台验证：
+
 ```javascript
 // 检查当前主题
 console.log(document.documentElement.getAttribute("saved-theme"))
@@ -150,14 +161,17 @@ window.toggleTheme?.()
 ## 📝 关键学习
 
 ### ✓ CSS 变量定义位置很重要
+
 - `:root` 中定义的变量在 `:root[attr]` 时可以覆盖
 - `body` 中定义的变量不会被 `:root` 属性影响
 
 ### ✓ Quartz 的主题系统使用 `:root[saved-theme]`
+
 - 不要创建平行的主题系统（如 `body.dark`）
 - 与现有机制集成，而不是替代
 
 ### ✓ 事件监听器工作 ≠ 样式生效
+
 - 即使 JavaScript 执行了，CSS 选择器不匹配也没用
 - 始终验证选择器是否在 CSS 中实际定义
 
@@ -176,4 +190,3 @@ window.toggleTheme?.()
 
 **修复完成时间**: 2025-12-09
 **状态**: ✅ 完全修复，准备构建测试
-
