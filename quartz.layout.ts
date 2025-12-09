@@ -30,10 +30,11 @@ export const defaultContentPageLayout: PageLayout = {
   ],
   // 左侧栏：Obsidian 风格的文件树导航
   left: [Component.Explorer()],
-  // 右侧栏：目录 + 反向链接 + 相关文章
+  // 右侧栏：目录 + 反向链接 + 关系图谱
   right: [
     Component.DesktopOnly(Component.TableOfContents()),
     Component.DesktopOnly(Component.Backlinks()),
+    Component.DesktopOnly(Component.Graph()),
   ],
 }
 
