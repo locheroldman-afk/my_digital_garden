@@ -1,7 +1,6 @@
 const userPref = window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark"
 const currentTheme = localStorage.getItem("theme") ?? userPref
 document.documentElement.setAttribute("saved-theme", currentTheme)
-document.body.classList.toggle("dark", currentTheme === "dark")
 
 const emitThemeChangeEvent = (theme: "light" | "dark") => {
   const event: CustomEventMap["themechange"] = new CustomEvent("themechange", {
@@ -15,7 +14,6 @@ window.toggleTheme = function() {
   const newTheme =
     document.documentElement.getAttribute("saved-theme") === "dark" ? "light" : "dark"
   document.documentElement.setAttribute("saved-theme", newTheme)
-  document.body.classList.toggle("dark", newTheme === "dark")
   localStorage.setItem("theme", newTheme)
   emitThemeChangeEvent(newTheme)
 }
@@ -35,7 +33,6 @@ const setupThemeToggle = () => {
 const themeChange = (e: MediaQueryListEvent) => {
   const newTheme = e.matches ? "dark" : "light"
   document.documentElement.setAttribute("saved-theme", newTheme)
-  document.body.classList.toggle("dark", newTheme === "dark")
   localStorage.setItem("theme", newTheme)
   emitThemeChangeEvent(newTheme)
 }

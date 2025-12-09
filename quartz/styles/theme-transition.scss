@@ -44,7 +44,7 @@ body {
 
 /* ==================== 暗色模式 ==================== */
 
-body.dark {
+:root[saved-theme="dark"] {
   background-color: var(--dark-bg);
   color: var(--dark-text);
   
@@ -95,7 +95,7 @@ header {
   align-items: center;
 }
 
-body.dark header {
+:root[saved-theme="dark"] header {
   background: linear-gradient(
     to bottom,
     var(--dark-bg),
@@ -123,7 +123,7 @@ body.dark header {
   transform: rotate(-0.5deg);
 }
 
-body.dark .logo {
+:root[saved-theme="dark"] .logo {
   color: var(--dark-text);
 }
 
@@ -160,7 +160,7 @@ nav a {
               var(--theme-transition);
 }
 
-body.dark nav a {
+:root[saved-theme="dark"] nav a {
   color: var(--dark-text);
 }
 
@@ -169,7 +169,7 @@ nav a:hover {
   color: var(--light-accent);
 }
 
-body.dark nav a:hover {
+:root[saved-theme="dark"] nav a:hover {
   color: var(--dark-accent);
 }
 
@@ -194,7 +194,7 @@ body.dark nav a:hover {
   box-shadow: inset 0 0 0 1px var(--light-pencil);
 }
 
-body.dark .theme-toggle {
+:root[saved-theme="dark"] .theme-toggle {
   border-color: var(--dark-pencil);
   color: var(--dark-text);
   box-shadow: inset 0 0 0 1px var(--dark-pencil);
@@ -211,7 +211,7 @@ body.dark .theme-toggle {
               var(--theme-transition);
 }
 
-body.dark .theme-toggle:hover {
+:root[saved-theme="dark"] .theme-toggle:hover {
   background-color: var(--dark-accent);
   box-shadow: 0 4px 12px rgba(139, 165, 194, 0.3),
               inset 0 0 0 1px var(--dark-accent);
@@ -231,7 +231,7 @@ body.dark .theme-toggle:hover {
   transform: rotate(0deg) scale(1);
 }
 
-body.dark .theme-toggle .sun-icon {
+:root[saved-theme="dark"] .theme-toggle .sun-icon {
   opacity: 0;
   transform: rotate(90deg) scale(0.8);
 }
@@ -242,7 +242,7 @@ body.dark .theme-toggle .sun-icon {
   transform: rotate(-90deg) scale(0.8);
 }
 
-body.dark .theme-toggle .moon-icon {
+:root[saved-theme="dark"] .theme-toggle .moon-icon {
   opacity: 1;
   transform: rotate(0deg) scale(1);
 }
@@ -259,7 +259,7 @@ article {
   margin: 2rem 0;
 }
 
-body.dark article {
+:root[saved-theme="dark"] article {
   background-color: var(--dark-surface);
   border-color: var(--dark-border);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
@@ -278,9 +278,9 @@ article h3 {
   transition: var(--theme-transition);
 }
 
-body.dark article h1,
-body.dark article h2,
-body.dark article h3 {
+:root[saved-theme="dark"] article h1,
+:root[saved-theme="dark"] article h2,
+:root[saved-theme="dark"] article h3 {
   color: var(--dark-text);
 }
 
@@ -306,7 +306,7 @@ article h1 {
   }
 }
 
-body.dark article h1::after {
+:root[saved-theme="dark"] article h1::after {
   background: linear-gradient(
     90deg,
     var(--dark-accent),
@@ -322,7 +322,7 @@ article p {
   transition: var(--theme-transition);
 }
 
-body.dark article p {
+:root[saved-theme="dark"] article p {
   color: var(--dark-text);
 }
 
@@ -340,7 +340,7 @@ li {
   transition: var(--theme-transition);
 }
 
-body.dark li {
+:root[saved-theme="dark"] li {
   color: var(--dark-text);
 }
 
@@ -350,7 +350,7 @@ ul > li::marker {
   font-weight: bold;
 }
 
-body.dark ul > li::marker {
+:root[saved-theme="dark"] ul > li::marker {
   color: var(--dark-accent);
 }
 
@@ -367,7 +367,7 @@ a {
   padding-bottom: 2px;
 }
 
-body.dark a {
+:root[saved-theme="dark"] a {
   color: var(--dark-accent);
   border-bottom-color: var(--dark-accent);
 }
@@ -391,7 +391,7 @@ code {
   transition: var(--theme-transition);
 }
 
-body.dark code {
+:root[saved-theme="dark"] code {
   background-color: var(--dark-border);
   color: var(--dark-text);
 }
@@ -406,7 +406,7 @@ pre {
   transition: var(--theme-transition);
 }
 
-body.dark pre {
+:root[saved-theme="dark"] pre {
   background-color: var(--dark-surface);
   border-color: var(--dark-border);
 }
@@ -417,7 +417,7 @@ pre code {
   padding: 0;
 }
 
-body.dark pre code {
+:root[saved-theme="dark"] pre code {
   color: var(--dark-text);
 }
 
@@ -433,7 +433,7 @@ img {
   margin: 2rem 0;
 }
 
-body.dark img {
+:root[saved-theme="dark"] img {
   filter: brightness(0.85) contrast(1.1);
   opacity: 0.9;
 }
@@ -442,7 +442,7 @@ img:hover {
   filter: brightness(1.05);
 }
 
-body.dark img:hover {
+:root[saved-theme="dark"] img:hover {
   filter: brightness(0.9) contrast(1.15);
 }
 
@@ -461,7 +461,7 @@ svg {
   }
 }
 
-body.dark svg {
+:root[saved-theme="dark"] svg {
   filter: brightness(0.9);
 }
 
@@ -485,9 +485,9 @@ input[type="button"] {
   box-shadow: inset 0 0 0 1px var(--light-pencil);
 }
 
-body.dark button,
-body.dark input[type="submit"],
-body.dark input[type="button"] {
+:root[saved-theme="dark"] button,
+:root[saved-theme="dark"] input[type="submit"],
+:root[saved-theme="dark"] input[type="button"] {
   background-color: var(--dark-surface);
   border-color: var(--dark-pencil);
   color: var(--dark-text);
@@ -504,9 +504,9 @@ input[type="button"]:hover {
               inset 0 0 0 1px var(--light-accent);
 }
 
-body.dark button:hover,
-body.dark input[type="submit"]:hover,
-body.dark input[type="button"]:hover {
+:root[saved-theme="dark"] button:hover,
+:root[saved-theme="dark"] input[type="submit"]:hover,
+:root[saved-theme="dark"] input[type="button"]:hover {
   background-color: var(--dark-accent);
   color: var(--dark-bg);
   box-shadow: 0 4px 12px rgba(139, 165, 194, 0.3),
@@ -537,10 +537,10 @@ textarea {
   }
 }
 
-body.dark input[type="text"],
-body.dark input[type="email"],
-body.dark input[type="search"],
-body.dark textarea {
+:root[saved-theme="dark"] input[type="text"],
+:root[saved-theme="dark"] input[type="email"],
+:root[saved-theme="dark"] input[type="search"],
+:root[saved-theme="dark"] textarea {
   background-color: var(--dark-surface);
   border-color: var(--dark-border);
   color: var(--dark-text);
@@ -567,7 +567,7 @@ body.dark textarea {
   transition: var(--theme-transition);
 }
 
-body.dark .card {
+:root[saved-theme="dark"] .card {
   background-color: var(--dark-surface);
   border-color: var(--dark-border);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
@@ -578,7 +578,7 @@ body.dark .card {
   box-shadow: 0 8px 24px rgba(139, 165, 194, 0.1);
 }
 
-body.dark .card:hover {
+:root[saved-theme="dark"] .card:hover {
   border-color: var(--dark-accent);
   box-shadow: 0 8px 24px rgba(139, 165, 194, 0.15);
 }
@@ -599,7 +599,7 @@ body.dark .card:hover {
   margin: 2rem 0;
 }
 
-body.dark .note-box {
+:root[saved-theme="dark"] .note-box {
   background-color: var(--dark-surface);
   border-color: var(--dark-pencil);
   box-shadow: 
@@ -620,7 +620,7 @@ body.dark .note-box {
   transition: var(--theme-transition);
 }
 
-body.dark .note-box::before {
+:root[saved-theme="dark"] .note-box::before {
   background-color: var(--dark-accent);
 }
 
@@ -640,7 +640,7 @@ hr {
   transition: var(--theme-transition);
 }
 
-body.dark hr {
+:root[saved-theme="dark"] hr {
   background: repeating-linear-gradient(
     90deg,
     var(--dark-pencil),
@@ -685,7 +685,7 @@ body.dark hr {
   transition: var(--theme-transition);
 }
 
-body.dark .graph {
+:root[saved-theme="dark"] .graph {
   background-color: var(--dark-surface);
   border-color: var(--dark-border);
 }
@@ -705,7 +705,7 @@ thead {
   transition: var(--theme-transition);
 }
 
-body.dark thead {
+:root[saved-theme="dark"] thead {
   background-color: var(--dark-surface);
 }
 
@@ -718,7 +718,7 @@ th {
   transition: var(--theme-transition);
 }
 
-body.dark th {
+:root[saved-theme="dark"] th {
   border-bottom-color: var(--dark-pencil);
   color: var(--dark-text);
 }
@@ -730,7 +730,7 @@ td {
   transition: var(--theme-transition);
 }
 
-body.dark td {
+:root[saved-theme="dark"] td {
   border-bottom-color: var(--dark-border);
   color: var(--dark-text);
 }
@@ -739,7 +739,7 @@ tr:hover {
   background-color: rgba(139, 165, 194, 0.05);
 }
 
-body.dark tr:hover {
+:root[saved-theme="dark"] tr:hover {
   background-color: rgba(139, 165, 194, 0.08);
 }
 
@@ -755,7 +755,7 @@ footer {
   transition: var(--theme-transition);
 }
 
-body.dark footer {
+:root[saved-theme="dark"] footer {
   background-color: var(--dark-surface);
   border-top-color: var(--dark-border);
   color: var(--dark-gray);
@@ -767,7 +767,7 @@ footer a {
   transition: var(--theme-transition);
 }
 
-body.dark footer a {
+:root[saved-theme="dark"] footer a {
   color: var(--dark-accent);
   border-bottom-color: var(--dark-accent);
 }
