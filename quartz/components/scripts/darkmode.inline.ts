@@ -20,17 +20,9 @@ window.toggleTheme = function() {
   emitThemeChangeEvent(newTheme)
 }
 
-document.addEventListener("nav", () => {
+const setupThemeToggle = () => {
   const switchTheme = () => {
     window.toggleTheme?.()
-  }
-
-  const themeChange = (e: MediaQueryListEvent) => {
-    const newTheme = e.matches ? "dark" : "light"
-    document.documentElement.setAttribute("saved-theme", newTheme)
-    document.body.classList.toggle("dark", newTheme === "dark")
-    localStorage.setItem("theme", newTheme)
-    emitThemeChangeEvent(newTheme)
   }
 
   // 兼容旧的 .darkmode 和新的 .theme-toggle-wrapper
@@ -38,9 +30,27 @@ document.addEventListener("nav", () => {
     darkmodeButton.addEventListener("click", switchTheme)
     window.addCleanup(() => darkmodeButton.removeEventListener("click", switchTheme))
   }
+}
 
-  // Listen for changes in prefers-color-scheme
-  const colorSchemeMediaQuery = window.matchMedia("(prefers-color-scheme: dark)")
-  colorSchemeMediaQuery.addEventListener("change", themeChange)
-  window.addCleanup(() => colorSchemeMediaQuery.removeEventListener("change", themeChange))
-})
+const themeChange = (e: MediaQueryListEvent) => {
+  const newTheme = e.matches ? "dark" : "light"
+  document.documentElement.setAttribute("saved-theme", newTheme)
+  document.body.classList.toggle("dark", newTheme === "dark")
+  localStorage.setItem("theme", newTheme)
+  emitThemeChangeEvent(newTheme)
+}
+
+// 在页面加载时立即设置事件监听器
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", setupThemeToggle)
+} else {
+  setupThemeToggle()
+}
+
+// 在 SPA 导航时重新设置事件监听器
+document.addEventListener("nav", setupThemeToggle)
+
+// Listen for changes in prefers-color-scheme
+const colorSchemeMediaQuery = window.matchMedia("(prefers-color-scheme: dark)")
+colorSchemeMediaQuery.addEventListener("change", themeChange)
+window.addCleanup(() => colorSchemeMediaQuery.removeEventListener("change", themeChange))
