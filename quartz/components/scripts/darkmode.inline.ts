@@ -19,15 +19,13 @@ window.toggleTheme = function() {
 }
 
 const setupThemeToggle = () => {
-  const switchTheme = () => {
-    window.toggleTheme?.()
-  }
-
-  // 兼容旧的 .darkmode 和新的 .theme-toggle-wrapper
-  for (const darkmodeButton of document.querySelectorAll(".darkmode, .theme-toggle-wrapper")) {
-    darkmodeButton.addEventListener("click", switchTheme)
-    window.addCleanup(() => darkmodeButton.removeEventListener("click", switchTheme))
-  }
+  // 使用 事件委托，这样即使按钮还没加载也能工作
+  document.addEventListener("click", (e: Event) => {
+    const target = e.target as HTMLElement
+    if (target?.classList.contains("theme-toggle-wrapper")) {
+      window.toggleTheme?.()
+    }
+  }, true)
 }
 
 const themeChange = (e: MediaQueryListEvent) => {
@@ -37,15 +35,8 @@ const themeChange = (e: MediaQueryListEvent) => {
   emitThemeChangeEvent(newTheme)
 }
 
-// 在页面加载时立即设置事件监听器
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", setupThemeToggle)
-} else {
-  setupThemeToggle()
-}
-
-// 在 SPA 导航时重新设置事件监听器
-document.addEventListener("nav", setupThemeToggle)
+// 立即设置事件委托（不需要等待 DOM 加载）
+setupThemeToggle()
 
 // Listen for changes in prefers-color-scheme
 const colorSchemeMediaQuery = window.matchMedia("(prefers-color-scheme: dark)")
