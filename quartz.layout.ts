@@ -30,34 +30,11 @@ export const defaultContentPageLayout: PageLayout = {
   ],
   // 左侧栏：Obsidian 风格的文件树导航
   left: [Component.Explorer()],
-  // 右侧栏：目录 + 反向链接 + 关系图谱
+  // 右侧栏：关系图谱 + 目录 + 反向链接
   right: [
+    Component.Graph(),
     Component.DesktopOnly(Component.TableOfContents()),
-    Component.DesktopOnly(Component.Backlinks()),
-    Component.DesktopOnly(
-      Component.Graph({
-        localGraph: {
-          depth: 1,
-          scale: 1.2,
-          repelForce: 0.5,
-          centerForce: 0.3,
-          linkDistance: 30,
-          fontSize: 0.6,
-          showTags: false,
-          enableRadial: false,
-        },
-        globalGraph: {
-          depth: -1,
-          scale: 0.9,
-          repelForce: 0.5,
-          centerForce: 0.2,
-          linkDistance: 30,
-          fontSize: 0.6,
-          showTags: false,
-          enableRadial: true,
-        },
-      }),
-    ),
+    Component.Backlinks(),
   ],
 }
 
