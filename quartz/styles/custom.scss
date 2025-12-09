@@ -1,3 +1,262 @@
 @use "./base.scss";
 
-// put your custom CSS here!
+/* ==================== 手绘极简设计系统 ==================== */
+
+/* 字体堆栈：正文干净易读，标题轻微手写味 */
+:root {
+  --font-body: "Noto Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-header: "Caveat", "Scribble", cursive, var(--font-body);
+  --transition-smooth: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ==================== 留白与间距 ==================== */
+body {
+  letter-spacing: 0.3px;
+  line-height: 1.8;
+}
+
+article {
+  max-width: 720px;
+  margin: 4rem auto;
+  padding: 0 2rem;
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-header);
+    margin-top: 3rem;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+
+  p {
+    margin-bottom: 2rem;
+    font-family: var(--font-body);
+  }
+}
+
+/* ==================== 手绘线条风格的分隔符 ==================== */
+hr {
+  border: none;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--tertiary), transparent);
+  margin: 3rem 0;
+  opacity: 0.6;
+  border-radius: 1px;
+
+  &::before {
+    content: "·";
+    display: block;
+    text-align: center;
+    margin-top: -10px;
+    color: var(--tertiary);
+    font-size: 24px;
+    letter-spacing: 8px;
+  }
+}
+
+/* ==================== 导航与交互：手绘活动感 ==================== */
+
+/* 搜索框：柔和边框 + 手绘感 */
+input[type="search"],
+input[type="text"] {
+  border: 2px solid var(--darkgray);
+  border-radius: 6px;
+  padding: 0.6rem 1rem;
+  font-family: var(--font-body);
+  background-color: var(--light);
+  transition: var(--transition-smooth);
+
+  &:focus {
+    border-color: var(--tertiary);
+    box-shadow: 0 0 0 3px rgba(107, 143, 184, 0.1);
+    transform: translateY(-2px);
+  }
+
+  &:hover {
+    border-color: var(--tertiary);
+  }
+}
+
+/* 按钮：微妙的手绘感 + 跳动效果 */
+button,
+a.button,
+[role="button"] {
+  border-radius: 6px;
+  border: 2px solid var(--tertiary);
+  background-color: transparent;
+  color: var(--dark);
+  padding: 0.6rem 1.2rem;
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  position: relative;
+
+  &:hover {
+    background-color: var(--tertiary);
+    color: var(--dark);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(107, 143, 184, 0.15);
+  }
+
+  &:active {
+    transform: translateY(-1px);
+  }
+}
+
+/* ==================== 卡片与容器：呼吸感 ==================== */
+blockquote {
+  border-left: 4px solid var(--tertiary);
+  padding: 1.5rem 1.5rem;
+  margin: 2rem 0;
+  background-color: rgba(107, 143, 184, 0.05);
+  border-radius: 4px;
+  font-style: italic;
+  color: var(--darkgray);
+}
+
+/* 代码块：保持干净 */
+pre {
+  background-color: var(--light);
+  border: 1px solid var(--lightgray);
+  border-radius: 6px;
+  padding: 1.5rem;
+  overflow-x: auto;
+  margin: 2rem 0;
+}
+
+code {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.9em;
+  color: var(--dark);
+}
+
+/* ==================== 链接：极简交互 ==================== */
+a {
+  color: var(--tertiary);
+  text-decoration: none;
+  position: relative;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: var(--dark);
+    
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--tertiary), transparent);
+      animation: underlineGrow 0.3s ease-out;
+    }
+  }
+}
+
+@keyframes underlineGrow {
+  from {
+    width: 0;
+    left: 0;
+  }
+  to {
+    width: 100%;
+    left: 0;
+  }
+}
+
+/* ==================== 列表：清晰视觉层级 ==================== */
+ul, ol {
+  margin-left: 2rem;
+  margin-bottom: 2rem;
+
+  li {
+    margin-bottom: 0.8rem;
+    line-height: 1.8;
+  }
+}
+
+ul li::marker {
+  color: var(--tertiary);
+  font-weight: bold;
+}
+
+/* ==================== 表格：极简美学 ==================== */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 2rem 0;
+  border: 1px solid var(--lightgray);
+  border-radius: 6px;
+  overflow: hidden;
+
+  th {
+    background-color: rgba(107, 143, 184, 0.08);
+    border-bottom: 2px solid var(--tertiary);
+    padding: 1rem;
+    text-align: left;
+    font-family: var(--font-header);
+    color: var(--dark);
+  }
+
+  td {
+    padding: 0.8rem 1rem;
+    border-bottom: 1px solid var(--lightgray);
+  }
+
+  tr:hover {
+    background-color: rgba(107, 143, 184, 0.03);
+  }
+}
+
+/* ==================== 响应式留白 ==================== */
+@media (max-width: 768px) {
+  article {
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+
+    h1, h2, h3 {
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      margin-bottom: 1.5rem;
+    }
+  }
+
+  input[type="search"],
+  input[type="text"] {
+    padding: 0.5rem 0.8rem;
+  }
+
+  blockquote {
+    padding: 1rem 1rem;
+    margin: 1.5rem 0;
+  }
+}
+
+/* ==================== 暗色模式优化 ==================== */
+@media (prefers-color-scheme: dark) {
+  input[type="search"],
+  input[type="text"] {
+    background-color: var(--light);
+    color: var(--dark);
+  }
+
+  blockquote {
+    background-color: rgba(107, 143, 184, 0.08);
+    color: var(--darkgray);
+  }
+
+  table {
+    border-color: var(--lightgray);
+
+    th {
+      background-color: rgba(107, 143, 184, 0.12);
+    }
+
+    tr:hover {
+      background-color: rgba(107, 143, 184, 0.06);
+    }
+  }
+}
